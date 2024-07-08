@@ -277,7 +277,7 @@ export default function Order() {
                                     id="screenshot"
                                     className="flex flex-col p-8 bg-base-300 relative"
                                 >
-                                    <div className="flex place-items-end justify-between">
+                                    <div className="flex flex-col place-items-start">
                                         <b className="card-title">Order</b>
                                         <div className="flex flex-col">
                                             <small className="text-xs opacity-50 mb-1">
@@ -335,6 +335,12 @@ export default function Order() {
                                                   ).format('0,0')
                                                 : '-'}
                                         </b>
+                                    </div>
+                                    <div className="divider"></div>
+                                    <div className="flex justify-center mt-2">
+                                        <p className="text-sm">
+                                            Terima Kasih Telah Berbelanja
+                                        </p>
                                     </div>
                                 </div>
 
