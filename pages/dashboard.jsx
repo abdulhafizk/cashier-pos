@@ -412,7 +412,7 @@ export default function Dashboard({ constructor }) {
                                 V1.2{' '}
                                 <span className="opacity-20">
                                     {' '}
-                                    - 15 Sep 2022 -{' '}
+                                    - 08 Juli 2024 -{' '}
                                 </span>
                             </code>
                         </pre>
@@ -433,7 +433,7 @@ export default function Dashboard({ constructor }) {
                                 V1.1{' '}
                                 <span className="opacity-20">
                                     {' '}
-                                    - 15 Sep 2022 -{' '}
+                                    - 05 Juli 2024 -{' '}
                                 </span>
                             </code>
                         </pre>
@@ -457,7 +457,7 @@ export default function Dashboard({ constructor }) {
                                 V1.0{' '}
                                 <span className="opacity-20">
                                     {' '}
-                                    - 7 Sep 2022 -{' '}
+                                    - 03 Juli 2024 -{' '}
                                 </span>
                             </code>
                         </pre>
