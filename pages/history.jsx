@@ -4,6 +4,8 @@ import Head from 'next/head'
 import numeral from 'numeral'
 import * as XLSX from 'xlsx'
 import { useRouter } from 'next/router'
+import html2canvas from 'html2canvas'
+import jsPDF from 'jspdf'
 
 export default function History() {
     const router = useRouter()
@@ -52,6 +54,16 @@ export default function History() {
         }
         setConfirmModal((prev) => {
             return { isOpen: !prev.isOpen, message, callback }
+        })
+    }
+
+    function downloadReceipt() {
+        const input = document.getElementById('screenshot')
+        html2canvas(input).then((canvas) => {
+            const imgData = canvas.toDataURL('image/png')
+            const pdf = new jsPDF()
+            pdf.addImage(imgData, 'PNG', 0, 0)
+            pdf.save('receipt.pdf')
         })
     }
 
@@ -258,6 +270,12 @@ export default function History() {
                         </div>
 
                         <div className="modal-action">
+                            <button
+                                onClick={downloadReceipt}
+                                className="btn btn-primary"
+                            >
+                                Download Struk
+                            </button>
                             <label
                                 onClick={() => setDetailModal((prev) => !prev)}
                                 className="btn"

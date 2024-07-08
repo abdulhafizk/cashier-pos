@@ -68,7 +68,7 @@ export default function Exports() {
             hour: '2-digit',
             minute: '2-digit',
         })
-        const fileName = title + " " + date + '.json'
+        const fileName = title + ' ' + date + '.json'
         const jsonStr = JSON.stringify(data)
         let element = document.createElement('a')
         element.setAttribute(
@@ -96,10 +96,28 @@ export default function Exports() {
         setCategoriesPreview(obj.categories)
     }
 
+    // Read xlsx files
+    function handleXlsxFile(event) {
+        const file = event.target.files[0]
+        const reader = new FileReader()
+        reader.onload = (e) => {
+            const data = new Uint8Array(e.target.result)
+            const workbook = XLSX.read(data, { type: 'array' })
+            const sheetName = workbook.SheetNames[0]
+            const worksheet = workbook.Sheets[sheetName]
+            const json = XLSX.utils.sheet_to_json(worksheet)
+            setItemsPreview(json)
+        }
+        reader.readAsArrayBuffer(file)
+    }
+
     function restore() {
-        window.localStorage.setItem("categories", JSON.stringify(categoriesPreview))
-        window.localStorage.setItem("items", JSON.stringify(itemsPreview))
-        router.push("items")
+        window.localStorage.setItem(
+            'categories',
+            JSON.stringify(categoriesPreview)
+        )
+        window.localStorage.setItem('items', JSON.stringify(itemsPreview))
+        router.push('items')
     }
     return (
         <>
@@ -114,18 +132,22 @@ export default function Exports() {
                         </h1>
 
                         <button
-                            onClick={() => downloadJson({ categories, items }, "CookiePOS items")}
+                            onClick={() =>
+                                downloadJson(
+                                    { categories, items },
+                                    'CookiePOS items'
+                                )
+                            }
                             className="btn btn-sm btn-success shadow-lg mb-2 ml-4 w-44 select-none hover:animate-pulse"
                         >
                             <span>Backup Data</span>
                         </button>
 
                         <div className="ml-4">
-
                             <input
                                 id="uploadItem"
                                 type="file"
-                                accept='.json'
+                                accept=".json"
                                 onChange={(event) => handleFile(event)}
                                 className="hidden"
                             />
@@ -136,88 +158,114 @@ export default function Exports() {
                                 Restore Data
                             </label>
 
-                            {(categoriesPreview?.length>0 || itemsPreview?.length>0) && (
-                                    <div className='border border-error border-dashed max-w-2xl rounded-lg mr-4 mb-2'>
-                                        <div className="flex flex-wrap mt-4 px-2">
-                                            {categoriesPreview.map((obj) => (
-                                                <CategoryCard
-                                                    key={obj.id}
-                                                    title={obj.category}
-                                                />
-                                            ))}
-                                        </div>
+                            <input
+                                id="uploadXlsxItem"
+                                type="file"
+                                accept=".xlsx"
+                                onChange={(event) => handleXlsxFile(event)}
+                                className="hidden"
+                            />
+                            <label
+                                htmlFor="uploadXlsxItem"
+                                className="btn btn-sm btn-info shadow-lg mb-2 w-44 select-none hover:animate-pulse"
+                            >
+                                Import Data .XLSX
+                            </label>
 
-                                        <div className="overflow-x-auto mx-4 mb-4">
-                                            <table className="table table-zebra table-compact mt-4 overflow-scroll">
-                                                <thead>
-                                                    <tr>
-                                                        <th className="w-24">
-                                                            id
-                                                        </th>
-                                                        <th className="w-36">
-                                                            Name
-                                                        </th>
-                                                        <th className="w-36">
-                                                            Category
-                                                        </th>
-                                                        <th className="w-24">
-                                                            Stock
-                                                        </th>
-                                                        <th className="w-24">
-                                                            Price
-                                                        </th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {itemsPreview?.map(
-                                                        (obj) => (
-                                                            <tr
-                                                                key={obj.id}
-                                                                className="group hover:text-accent cursor-pointer"
-                                                            >
-                                                                <td>
-                                                                    {obj.id}
-                                                                </td>
-                                                                <td>
-                                                                    {obj.item}
-                                                                </td>
-                                                                <td>
-                                                                    {JSON.parse(obj.category).category}
-                                                                </td>
-                                                                <td>
-                                                                    {obj.stock}
-                                                                </td>
-                                                                <td>
-                                                                    {numeral(obj.price).format("0,0")}
-                                                                </td>
-                                                            </tr>
-                                                        )
-                                                    )}
-                                                </tbody>
-                                            </table>
-                                        </div>
-
-                                        <div className="flex flex-wrap justify-end items-center mt-8 mx-4 mb-4">
-                                            <b className='font-semibold text-sm md:text-lg my-2'>Previous items & categories will be deleted!</b>
-                                            <button
-                                                onClick={() => {setCategoriesPreview([]); setItemsPreview([])}}
-                                                className="btn btn-sm btn-error shadow-lg mb-2 ml-12 w-24 select-none hover:animate-pulse"
-                                                >
-                                                <span>Cancel</span>
-                                            </button>
-                                            <button
-                                                onClick={() => restore()}
-                                                className="btn btn-sm btn-success shadow-lg mb-2 ml-2 w-24 select-none hover:animate-pulse"
-                                                >
-                                                <span>Save</span>
-                                            </button>
-                                        </div>
+                            {(categoriesPreview?.length > 0 ||
+                                itemsPreview?.length > 0) && (
+                                <div className="border border-error border-dashed max-w-2xl rounded-lg mr-4 mb-2">
+                                    <div className="flex flex-wrap mt-4 px-2">
+                                        {categoriesPreview.map((obj) => (
+                                            <CategoryCard
+                                                key={obj.id}
+                                                title={obj.category}
+                                            />
+                                        ))}
                                     </div>
-                                )}
+
+                                    <div className="overflow-x-auto mx-4 mb-4">
+                                        <table className="table table-zebra table-compact mt-4 overflow-scroll">
+                                            <thead>
+                                                <tr>
+                                                    <th className="w-24">id</th>
+                                                    <th className="w-36">
+                                                        Name
+                                                    </th>
+                                                    <th className="w-36">
+                                                        Category
+                                                    </th>
+                                                    <th className="w-24">
+                                                        Stock
+                                                    </th>
+                                                    <th className="w-24">
+                                                        Price
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {itemsPreview?.map((obj) => (
+                                                    <tr
+                                                        key={obj.id}
+                                                        className="group hover:text-accent cursor-pointer"
+                                                    >
+                                                        <td>{obj.id}</td>
+                                                        <td>{obj.item}</td>
+                                                        <td>
+                                                            {
+                                                                JSON.parse(
+                                                                    obj.category
+                                                                ).category
+                                                            }
+                                                        </td>
+                                                        <td>{obj.stock}</td>
+                                                        <td>
+                                                            {numeral(
+                                                                obj.price
+                                                            ).format('0,0')}
+                                                        </td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <div className="flex flex-wrap justify-end items-center mt-8 mx-4 mb-4">
+                                        <b className="font-semibold text-sm md:text-lg my-2">
+                                            Previous items & categories will be
+                                            deleted!
+                                        </b>
+                                        <button
+                                            onClick={() => {
+                                                setCategoriesPreview([])
+                                                setItemsPreview([])
+                                            }}
+                                            className="btn btn-sm btn-error shadow-lg mb-2 ml-12 w-24 select-none hover:animate-pulse"
+                                        >
+                                            <span>Cancel</span>
+                                        </button>
+                                        <button
+                                            onClick={() => restore()}
+                                            className="btn btn-sm btn-success shadow-lg mb-2 ml-2 w-24 select-none hover:animate-pulse"
+                                        >
+                                            <span>Save</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            )}
                         </div>
 
                         <button
-                            onClick={() => {if(confirm("Delete items & categories?")){ window.localStorage.setItem("items", "[]"); window.localStorage.setItem("categories", "[]");router.push("items") }}}
+                            onClick={() => {
+                                if (confirm('Delete items & categories?')) {
+                                    window.localStorage.setItem('items', '[]')
+                                    window.localStorage.setItem(
+                                        'categories',
+                                        '[]'
+                                    )
+                                    router.push('items')
+                                }
+                            }}
                             className="btn btn-sm btn-error shadow-lg mb-2 ml-4 w-44 select-none hover:animate-pulse"
                         >
                             <span>Delete Data</span>
@@ -237,7 +285,12 @@ export default function Exports() {
                         </button>
 
                         <button
-                            onClick={() => {if(confirm("Delete history?")){window.localStorage.setItem("history", "[]");router.push("history")}}}
+                            onClick={() => {
+                                if (confirm('Delete history?')) {
+                                    window.localStorage.setItem('history', '[]')
+                                    router.push('history')
+                                }
+                            }}
                             className="btn btn-sm btn-error shadow-lg mb-2 ml-4 w-44 select-none hover:animate-pulse"
                         >
                             <span>Delete History</span>
