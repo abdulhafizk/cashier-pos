@@ -96,6 +96,15 @@ export default function Dashboard({ constructor }) {
                 <title>CookiePOS | Dashboard</title>
             </Head>
             <GlobalDataProvider>
+                <span
+                    class="animate-meteor-effect fixed top-1/2 left-1/2 h-0.5 w-0.5 rounded-[9999px] shadow-[0_0_0_1px_#ffffff10] rotate-[215deg] before:content-[&#x27;&#x27;] before:absolute before:top-1/2 before:transform before:-translate-y-[50%] before:w-[50px] before:h-[1px] before:bg-gradient-to-r before:from-[#ffffff] before:to-transparent"
+                    style="
+                            top: 0;
+                            left: 174px;
+                            animation-delay: 0.21741940692853456s;
+                            animation-duration: 2s;
+                        "
+                ></span>
                 <div className="flex flex-col">
                     <div
                         className={`flex ${
