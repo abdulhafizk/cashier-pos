@@ -22,6 +22,7 @@ export default function Order() {
   const [items, setItems] = useState([]);
   const [history, setHistory] = useState([]);
   const [itemsFilter, setItemsFilter] = useState([]);
+  const [users, setUsers] = useState([]);
 
   function constructor() {
     let categories = window.localStorage.getItem("categories");
@@ -34,6 +35,10 @@ export default function Order() {
 
     let history = window.localStorage.getItem("history");
     setHistory(JSON.parse(history));
+
+    let users = window.localStorage.getItem("users");
+    users = JSON.parse(users);
+    setUsers(users);
   }
   useEffect(() => {
     constructor();
@@ -350,9 +355,7 @@ export default function Order() {
                         }}
                         required
                       />
-                      <input
-                        type="text"
-                        placeholder="User"
+                      <select
                         className="input input-sm mb-2 w-full"
                         value={orders.user}
                         onChange={(event) => {
@@ -364,7 +367,14 @@ export default function Order() {
                           });
                         }}
                         required
-                      />
+                      >
+                        <option value="">Pilih User</option>
+                        {users.map((user) => (
+                          <option key={user.id} value={user.name}>
+                            {user.name}
+                          </option>
+                        ))}
+                      </select>
 
                       <div className="flex justify-between mr-1">
                         <div
