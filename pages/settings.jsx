@@ -263,19 +263,6 @@ export default function Exports() {
                 </div>
               )}
             </div>
-
-            <button
-              onClick={() => {
-                if (confirm("Delete items & categories?")) {
-                  window.localStorage.setItem("items", "[]");
-                  window.localStorage.setItem("categories", "[]");
-                  router.push("items");
-                }
-              }}
-              className="btn btn-sm btn-error shadow-lg w-44 select-none hover:animate-pulse ml-4 my-8"
-            >
-              <span>Delete All Data</span>
-            </button>
           </div>
 
           <div className="flex flex-col lg:w-[80vw] h-full">
@@ -289,6 +276,33 @@ export default function Exports() {
               >
                 <span>Download .xlsx</span>
               </button>
+            </div>
+          </div>
+          <div className="flex flex-col lg:w-[80vw] h-full">
+            <h1 className="text-xl font-bold text-base-content pt-6 pl-6 pb-6">
+              General Settings
+            </h1>
+            <div className="ml-4">
+              <button
+                onClick={() => {
+                  if (confirm("Delete items & categories?")) {
+                    window.localStorage.setItem("items", "[]");
+                    window.localStorage.setItem("categories", "[]");
+                    router.push("items");
+                  }
+                }}
+                className="btn btn-sm btn-error shadow-lg w-44 select-none hover:animate-pulse ml-4 my-8"
+              >
+                <span>Delete All Data</span>
+              </button>
+              <a
+                href="https://github.com/abdulhafizk/cashier-pos/issues"
+                target="_blank"
+                rel="noreferrer"
+                className="btn btn-sm btn-error shadow-lg mb-2 ml-4 w-44 select-none hover:animate-pulse"
+              >
+                <span>Report Issue</span>
+              </a>
             </div>
           </div>
         </div>
