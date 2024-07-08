@@ -45,11 +45,6 @@ export default function Drawer({ children, changeTheme, theme }) {
                 <a>History</a>
               </Link>
             </li>
-            <li className={`${router.pathname === "/chat" && "activeDrawer"} `}>
-              <Link href={"chat"}>
-                <a>Chat</a>
-              </Link>
-            </li>
             <li
               className={`${
                 router.pathname === "/settings" && "activeDrawer"
