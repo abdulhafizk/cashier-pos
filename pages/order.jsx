@@ -361,6 +361,22 @@ export default function Order() {
                                                 }}
                                                 required
                                             />
+                                            <input
+                                                type="text"
+                                                placeholder="User"
+                                                className="input input-sm mb-2 w-full"
+                                                value={orders.user}
+                                                onChange={(event) => {
+                                                    setOrders((prev) => {
+                                                        return {
+                                                            ...prev,
+                                                            user: event.target
+                                                                .value,
+                                                        }
+                                                    })
+                                                }}
+                                                required
+                                            />
 
                                             <div className="flex justify-between mr-1">
                                                 <div
