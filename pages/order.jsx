@@ -278,14 +278,16 @@ export default function Order() {
                                     className="flex flex-col p-8 bg-base-300 relative"
                                 >
                                     <div className="flex flex-col place-items-start">
-                                        <b className="card-title">Order</b>
-                                        <div className="flex flex-col items-end">
-                                            <small className="text-xs opacity-50 mb-1">
-                                                {orders.date}
-                                            </small>
-                                            <small className="text-xs opacity-50 mb-1">
-                                                {orders.user}
-                                            </small>
+                                        <div className="flex justify-between w-full">
+                                            <b className="card-title">Order</b>
+                                            <div className="flex flex-col items-end">
+                                                <small className="text-xs opacity-50 mb-1">
+                                                    {orders.date}
+                                                </small>
+                                                <small className="text-xs opacity-50 mb-1">
+                                                    {orders.user}
+                                                </small>
+                                            </div>
                                         </div>
                                     </div>
                                     <div className="divider"></div>
@@ -341,8 +343,12 @@ export default function Order() {
                                         <p className="text-sm">
                                             Terima Kasih Telah Berbelanja
                                         </p>
-                                        <p>Saran & Kritik</p>
-                                        <p>+62 822-4713-4797</p>
+                                        <p className="text-sm">
+                                            Saran & Kritik
+                                        </p>
+                                        <p className="text-sm">
+                                            +62 822-4713-4797
+                                        </p>
                                     </div>
                                 </div>
 

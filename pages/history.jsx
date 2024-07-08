@@ -10,7 +10,11 @@ export default function History() {
     const [history, setHistory] = useState([])
     const [item, setItem] = useState([])
     const [detailModal, setDetailModal] = useState(false)
-    const [confirmModal, setConfirmModal] = useState({isOpen: false, message: "", callback: null})
+    const [confirmModal, setConfirmModal] = useState({
+        isOpen: false,
+        message: '',
+        callback: null,
+    })
 
     function constructor() {
         let history = JSON.parse(window.localStorage.getItem('history'))
@@ -19,7 +23,6 @@ export default function History() {
     useEffect(() => {
         constructor()
     }, [])
-
 
     function deleteHistory(id) {
         const oldHistory = history
@@ -39,13 +42,17 @@ export default function History() {
         setDetailModal(!detailModal)
     }
     function confirm(message, callback) {
-        if(callback==null) {
-            callback = () => {return 0}
+        if (callback == null) {
+            callback = () => {
+                return 0
+            }
         }
-        if(message==null) {
-            let message = "Confirm action"
+        if (message == null) {
+            let message = 'Confirm action'
         }
-        setConfirmModal(prev=>{return {isOpen: !prev.isOpen, message, callback}})
+        setConfirmModal((prev) => {
+            return { isOpen: !prev.isOpen, message, callback }
+        })
     }
 
     let historyList = history?.map((obj) => {
@@ -83,7 +90,11 @@ export default function History() {
                 <td>
                     <div className="flex">
                         <button
-                            onClick={()=> confirm("Delete history?", () => deleteHistory(obj.id))}
+                            onClick={() =>
+                                confirm('Delete history?', () =>
+                                    deleteHistory(obj.id)
+                                )
+                            }
                             className="btn btn-xs btn-error px-2"
                         >
                             <svg
@@ -119,7 +130,6 @@ export default function History() {
             </Head>
             <GlobalDataProvider>
                 <div className="pt-4 flex flex-col">
-
                     <h1 className="text-xl font-bold text-base-content pt-2 pl-6 pb-4">
                         History
                     </h1>
@@ -154,7 +164,7 @@ export default function History() {
                         </h2>
                     )}
                 </div>
-                
+
                 {/* history modal */}
                 <input type="checkbox" className="modal-toggle" />
                 <div
@@ -167,12 +177,17 @@ export default function History() {
                             id="screenshot"
                             className="card-body bg-base-300 w-80 relative flex mx-auto"
                         >
-                            <div className="flex place-items-end justify-between">
-                                <b className="card-title">Order</b>
-                                <div>
-                                    <small className="text-xs opacity-50 mb-1">
-                                        {item.date}
-                                    </small>
+                            <div className="flex flex-col place-items-start">
+                                <div className="flex justify-between w-full">
+                                    <b className="card-title">Order</b>
+                                    <div className="flex flex-col items-end">
+                                        <small className="text-xs opacity-50 mb-1">
+                                            {item.date}
+                                        </small>
+                                        <small className="text-xs opacity-50 mb-1">
+                                            {item.user}
+                                        </small>
+                                    </div>
                                 </div>
                             </div>
                             <div className="divider"></div>
@@ -180,7 +195,9 @@ export default function History() {
                             {item.id &&
                                 item.items.map((item) => (
                                     <div className="flex" key={item.id}>
-                                        <p className="text-sm w-1/2">{item.item}</p>
+                                        <p className="text-sm w-1/2">
+                                            {item.item}
+                                        </p>
                                         <div className="flex items-center w-1/2">
                                             <small>
                                                 {numeral(item.price).format(
@@ -230,6 +247,14 @@ export default function History() {
                                         : '-'}
                                 </b>
                             </div>
+                            <div className="divider"></div>
+                            <div className="text-center mt-2">
+                                <p className="text-sm">
+                                    Terima Kasih Telah Berbelanja
+                                </p>
+                                <p className="text-sm">Saran & Kritik</p>
+                                <p className="text-sm">+62 822-4713-4797</p>
+                            </div>
                         </div>
 
                         <div className="modal-action">
@@ -255,19 +280,16 @@ export default function History() {
                         <div className="modal-action">
                             <label
                                 className="btn bg-none"
-                                onClick={() =>
-                                    setConfirmModal((prev) => !prev)
-                                }
+                                onClick={() => setConfirmModal((prev) => !prev)}
                             >
                                 Cancel
                             </label>
                             <button
                                 className="btn btn-error"
-                                onClick={function() {
-                                    confirmModal.callback() 
+                                onClick={function () {
+                                    confirmModal.callback()
                                     confirm()
-                                    }
-                                }
+                                }}
                             >
                                 Confirm
                             </button>
