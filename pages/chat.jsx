@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { nanoid } from "nanoid";
+import Navbar from "../components/Navbar";
+import Drawer from "../components/Drawer";
+import Head from "next/head";
 
 export default function Chat() {
   const router = useRouter();
@@ -38,6 +41,13 @@ export default function Chat() {
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">
+      <Head>
+        <title>Chat</title>
+        <meta name="description" content="Chat page" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <Navbar />
+      <Drawer />
       <div className="w-3/4 bg-white shadow rounded-lg p-4">
         <div className="flex flex-col">
           {messages.map((message) => (
