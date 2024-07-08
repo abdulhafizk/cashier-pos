@@ -291,7 +291,7 @@ export default function Exports() {
                     router.push("items");
                   }
                 }}
-                className="btn btn-sm btn-error shadow-lg w-44 select-none hover:animate-pulse ml-4 my-8"
+                className="btn btn-sm btn-error shadow-lg w-44 select-none hover:animate-pulse"
               >
                 <span>Delete All Data</span>
               </button>
