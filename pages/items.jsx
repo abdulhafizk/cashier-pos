@@ -16,7 +16,6 @@ export default function Items() {
         message: '',
         callback: null,
     })
-    const [users, setUsers] = useState([])
     const [userModal, setUserModal] = useState(false)
 
     const initialCategoryForm = {
@@ -44,26 +43,18 @@ export default function Items() {
     const initialUserForm = {
         id: nanoid(6),
         name: '',
-        role: '',
+        email: '',
     }
     const [userForm, setUserForm] = useState(initialUserForm)
 
     function constructor() {
-        try {
-            let categories = window.localStorage.getItem('categories')
-            categories = JSON.parse(categories) || []
-            setCategories(categories)
+        let categories = window.localStorage.getItem('categories')
+        categories = JSON.parse(categories)
+        setCategories(categories)
 
-            let items = window.localStorage.getItem('items')
-            items = JSON.parse(items) || []
-            setItems(items)
-
-            let users = window.localStorage.getItem('users')
-            users = JSON.parse(users) || []
-            setUsers(users)
-        } catch (error) {
-            console.error('Error loading data from localStorage:', error)
-        }
+        let items = window.localStorage.getItem('items')
+        items = JSON.parse(items)
+        setItems(items)
     }
     useEffect(() => {
         constructor()
@@ -110,101 +101,73 @@ export default function Items() {
     // Data handler
     function categorySubmit(event) {
         event.preventDefault()
-        try {
-            let newCategory = [...categories]
-            newCategory.unshift(categoryForm)
-            newCategory = JSON.stringify(newCategory)
-            window.localStorage.setItem('categories', newCategory)
-            setCategoryForm(initialCategoryForm)
-            setCategoryModal((prev) => !prev)
-        } catch (error) {
-            console.error('Error saving category:', error)
-        }
+        let newCategory = categories
+        newCategory.unshift(categoryForm)
+        newCategory = JSON.stringify(newCategory)
+        window.localStorage.setItem('categories', newCategory)
+        setCategoryForm(initialCategoryForm)
+        setCategoryModal((prev) => !prev)
     }
     function categoryDelete(id) {
-        try {
-            let newItems = []
-            for (let i = 0; i < items.length; i++) {
-                let sample = items[i]
-                if (JSON.parse(sample.category).id === id) {
-                    newItems.push({
-                        ...sample,
-                        category: JSON.stringify(uncategorized),
-                    })
-                } else {
-                    newItems.push({ ...sample })
-                }
+        let newItems = []
+        for (let i = 0; i < items.length; i++) {
+            let sample = items[i]
+            if (JSON.parse(sample.category).id === id) {
+                newItems.push({
+                    ...sample,
+                    category: JSON.stringify(uncategorized),
+                })
+            } else {
+                newItems.push({ ...sample })
             }
-            setItems(newItems)
-            newItems = JSON.stringify(newItems)
-            window.localStorage.setItem('items', newItems)
-
-            let newCategory = categories.filter((cat) => cat.id !== id)
-            newCategory = JSON.stringify(newCategory)
-            window.localStorage.setItem('categories', newCategory)
-            constructor()
-        } catch (error) {
-            console.error('Error deleting category:', error)
         }
+        setItems(newItems)
+        newItems = JSON.stringify(newItems)
+        window.localStorage.setItem('items', newItems)
+
+        let newCategory = categories
+        newCategory = newCategory.filter((cat) => cat.id !== id)
+        newCategory = JSON.stringify(newCategory)
+        window.localStorage.setItem('categories', newCategory)
+        constructor()
     }
     function itemSubmit(event) {
         event.preventDefault()
-        try {
-            let newItem = [...items]
-            newItem.unshift(itemForm)
-            newItem = JSON.stringify(newItem)
-            window.localStorage.setItem('items', newItem)
-            setItemForm(initialItemForm)
-            setItemModal((prev) => !prev)
-        } catch (error) {
-            console.error('Error saving item:', error)
-        }
+        let newItem = items
+        newItem.unshift(itemForm)
+        newItem = JSON.stringify(newItem)
+        window.localStorage.setItem('items', newItem)
+        setItemForm(initialItemForm)
+        setItemModal((prev) => !prev)
     }
     function itemUpdate(event) {
         event.preventDefault()
-        try {
-            let newItems = []
-            let updateItem = updateItemForm
-            for (let i = 0; i < items.length; i++) {
-                if (items[i].id !== updateItem.id) {
-                    newItems.push(items[i])
-                } else {
-                    newItems.push(updateItem)
-                }
+        let newItems = []
+        let updateItem = updateItemForm
+        for (let i = 0; i < items.length; i++) {
+            if (items[i].id != updateItem.id) {
+                newItems.push(items[i])
+            } else {
+                newItems.push(updateItem)
             }
-            window.localStorage.setItem('items', JSON.stringify(newItems))
-            constructor()
-            setItemUpdateModal((prev) => !prev)
-        } catch (error) {
-            console.error('Error updating item:', error)
         }
+        window.localStorage.setItem('items', JSON.stringify(newItems))
+        constructor()
+        setItemUpdateModal((prev) => !prev)
     }
     function itemDelete(id) {
-        try {
-            const newItems = items.filter((item) => item.id !== id)
-            setItems(newItems)
-            window.localStorage.setItem('items', JSON.stringify(newItems))
-        } catch (error) {
-            console.error('Error deleting item:', error)
+        const newItems = []
+        for (let i = 0; i < items.length; i++) {
+            if (items[i].id != id) {
+                newItems.push(items[i])
+            }
         }
+        setItems(newItems)
+        window.localStorage.setItem('items', JSON.stringify(newItems))
     }
     function openItemUpdate(obj) {
         setItemUpdateModal((prev) => !prev)
         setUpdateItemForm(obj)
-    }
-
-    function userSubmit(event) {
-        event.preventDefault()
-        try {
-            let newUser = [...users]
-            newUser.unshift(userForm)
-            newUser = JSON.stringify(newUser)
-            window.localStorage.setItem('users', newUser)
-            setUserForm(initialUserForm)
-            setUserModal((prev) => !prev)
-        } catch (error) {
-            console.error('Error saving user:', error)
-        }
     }
 
     function confirm(message, callback) {
@@ -214,7 +177,7 @@ export default function Items() {
             }
         }
         if (message == null) {
-            message = 'Confirm action'
+            let message = 'Confirm action'
         }
         setConfirmModal((prev) => {
             return { isOpen: !prev.isOpen, message, callback }
@@ -594,7 +557,7 @@ export default function Items() {
                                     onChange={(event) =>
                                         handleItemChange(event)
                                     }
-                                    placeholder="e.g. 10"
+                                    placeholder="e.g. 150"
                                     className="input input-bordered text-base w-full max-w-xs"
                                     required
                                 />
@@ -602,23 +565,22 @@ export default function Items() {
 
                             <div className="form-control w-full max-w-xs mb-8">
                                 <label className="label">
-                                    <span className="label-text">
-                                        Select Category
-                                    </span>
+                                    <span className="label-text">Category</span>
                                 </label>
                                 <select
-                                    name="category"
-                                    value={itemForm.category}
+                                    className="select select-bordered w-full max-w-xs"
                                     onChange={(event) =>
                                         handleItemChange(event)
                                     }
-                                    className="select select-bordered"
-                                    required
+                                    name="category"
+                                    value={itemForm.category}
                                 >
-                                    <option disabled defaultValue={'-'}>
-                                        Pick one
+                                    <option
+                                        value={JSON.stringify(uncategorized)}
+                                    >
+                                        Uncategorized
                                     </option>
-                                    {categories.map((cat) => (
+                                    {categories?.map((cat) => (
                                         <option
                                             key={cat.id}
                                             value={JSON.stringify(cat)}
@@ -631,7 +593,7 @@ export default function Items() {
 
                             <div className="modal-action">
                                 <label
-                                    htmlFor="item-modal"
+                                    htmlFor="category-modal"
                                     className="btn bg-none"
                                     onClick={() =>
                                         setItemModal((prev) => !prev)
@@ -653,8 +615,10 @@ export default function Items() {
                     }`}
                 >
                     <div className="modal-box relative">
-                        <form onSubmit={itemUpdate}>
-                            <h3 className="font-bold text-lg">Update item</h3>
+                        <form>
+                            <h3 className="font-bold text-lg">
+                                Update {updateItemForm?.item}
+                            </h3>
                             <div className="divider"></div>
 
                             <div className="form-control w-full max-w-xs mb-2">
@@ -666,13 +630,12 @@ export default function Items() {
                                 <input
                                     type="text"
                                     name="item"
-                                    value={updateItemForm.item}
+                                    value={updateItemForm?.item}
                                     onChange={(event) =>
                                         handleItemUpdateChange(event)
                                     }
                                     placeholder="e.g. drinks"
                                     className="input input-bordered text-base w-full max-w-xs"
-                                    required
                                 />
                             </div>
 
@@ -688,13 +651,12 @@ export default function Items() {
                                             event.preventDefault()
                                         }
                                     }}
-                                    value={updateItemForm.price}
+                                    value={updateItemForm?.price}
                                     onChange={(event) =>
                                         handleItemUpdateChange(event)
                                     }
                                     placeholder="e.g. 25000"
                                     className="input input-bordered text-base w-full max-w-xs"
-                                    required
                                 />
                             </div>
 
@@ -710,35 +672,33 @@ export default function Items() {
                                             event.preventDefault()
                                         }
                                     }}
-                                    value={updateItemForm.stock}
+                                    value={updateItemForm?.stock}
                                     onChange={(event) =>
                                         handleItemUpdateChange(event)
                                     }
-                                    placeholder="e.g. 10"
+                                    placeholder="e.g. 150"
                                     className="input input-bordered text-base w-full max-w-xs"
-                                    required
                                 />
                             </div>
 
                             <div className="form-control w-full max-w-xs mb-8">
                                 <label className="label">
-                                    <span className="label-text">
-                                        Select Category
-                                    </span>
+                                    <span className="label-text">Category</span>
                                 </label>
                                 <select
-                                    name="category"
-                                    value={updateItemForm.category}
+                                    className="select select-bordered w-full max-w-xs"
                                     onChange={(event) =>
                                         handleItemUpdateChange(event)
                                     }
-                                    className="select select-bordered"
-                                    required
+                                    name="category"
+                                    value={updateItemForm?.category}
                                 >
-                                    <option disabled defaultValue={'-'}>
-                                        Pick one
+                                    <option
+                                        value={JSON.stringify(uncategorized)}
+                                    >
+                                        Uncategorized
                                     </option>
-                                    {categories.map((cat) => (
+                                    {categories?.map((cat) => (
                                         <option
                                             key={cat.id}
                                             value={JSON.stringify(cat)}
@@ -751,7 +711,6 @@ export default function Items() {
 
                             <div className="modal-action">
                                 <label
-                                    htmlFor="item-update-modal"
                                     className="btn bg-none"
                                     onClick={() =>
                                         setItemUpdateModal((prev) => !prev)
@@ -759,94 +718,42 @@ export default function Items() {
                                 >
                                     Cancel
                                 </label>
-                                <button className="btn btn-success">
+                                <button
+                                    className="btn btn-success"
+                                    onClick={itemUpdate}
+                                >
                                     Save
                                 </button>
                             </div>
                         </form>
-                        <input
-                            type="checkbox"
-                            id="user-modal"
-                            className="modal-toggle"
-                        />
-                        <div className="modal">
-                            <div className="modal-box relative">
-                                <label
-                                    htmlFor="user-modal"
-                                    className="btn btn-sm btn-circle absolute right-2 top-2"
-                                    onClick={() =>
-                                        setUserModal((prev) => !prev)
-                                    }
-                                >
-                                    ✕
-                                </label>
-                                <h3 className="text-lg font-bold">Add User</h3>
-                                <form
-                                    onSubmit={(e) => {
-                                        e.preventDefault()
-                                        // Add your submit logic here
-                                    }}
-                                >
-                                    <div className="form-control w-full max-w-xs mb-4">
-                                        <label className="label">
-                                            <span className="label-text">
-                                                Name
-                                            </span>
-                                        </label>
-                                        <input
-                                            type="text"
-                                            name="name"
-                                            value={userForm.name}
-                                            onChange={(e) =>
-                                                setUserForm({
-                                                    ...userForm,
-                                                    name: e.target.value,
-                                                })
-                                            }
-                                            placeholder="e.g. John Doe"
-                                            className="input input-bordered text-base w-full max-w-xs"
-                                            required
-                                        />
-                                    </div>
-
-                                    <div className="form-control w-full max-w-xs mb-4">
-                                        <label className="label">
-                                            <span className="label-text">
-                                                Role
-                                            </span>
-                                        </label>
-                                        <input
-                                            type="text"
-                                            name="role"
-                                            value={userForm.role}
-                                            onChange={(e) =>
-                                                setUserForm({
-                                                    ...userForm,
-                                                    role: e.target.value,
-                                                })
-                                            }
-                                            placeholder="e.g. Admin"
-                                            className="input input-bordered text-base w-full max-w-xs"
-                                            required
-                                        />
-                                    </div>
-
-                                    <div className="modal-action">
-                                        <label
-                                            htmlFor="user-modal"
-                                            className="btn bg-none"
-                                            onClick={() =>
-                                                setUserModal((prev) => !prev)
-                                            }
-                                        >
-                                            Cancel
-                                        </label>
-                                        <button className="btn btn-success">
-                                            Save
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
+                    </div>
+                </div>
+                {/* confirm modal */}
+                <div
+                    className={`modal modal-bottom sm:modal-middle ${
+                        confirmModal.isOpen && 'modal-open'
+                    }`}
+                >
+                    <div className="modal-box relative">
+                        <div className="flex text-lg font-bold">
+                            {confirmModal.message}
+                        </div>
+                        <div className="modal-action">
+                            <label
+                                className="btn bg-none"
+                                onClick={() => setConfirmModal((prev) => !prev)}
+                            >
+                                Cancel
+                            </label>
+                            <button
+                                className="btn btn-error"
+                                onClick={function () {
+                                    confirmModal.callback()
+                                    confirm()
+                                }}
+                            >
+                                Confirm
+                            </button>
                         </div>
                     </div>
                 </div>
