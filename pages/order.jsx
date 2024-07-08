@@ -46,7 +46,13 @@ export default function Order() {
                 year: 'numeric',
                 hour: '2-digit',
                 minute: '2-digit',
-                second: '2-digit',
+            })
+            const cs = new Date().toLocaleString('en-us', {
+                day: 'numeric',
+                month: 'short',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
             })
             setOrders((prev) => {
                 return { ...prev, id: nanoid(6), date }
