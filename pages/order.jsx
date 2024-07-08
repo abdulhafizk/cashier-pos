@@ -26,20 +26,22 @@ export default function Order() {
 
   function constructor() {
     let categories = window.localStorage.getItem("categories");
-    categories = JSON.parse(categories);
+    categories = categories ? JSON.parse(categories) : [];
     setCategories(categories);
 
     let items = window.localStorage.getItem("items");
-    items = JSON.parse(items);
+    items = items ? JSON.parse(items) : [];
     setItems(items);
 
     let history = window.localStorage.getItem("history");
-    setHistory(JSON.parse(history));
+    history = history ? JSON.parse(history) : [];
+    setHistory(history);
 
     let users = window.localStorage.getItem("users");
-    users = JSON.parse(users);
+    users = users ? JSON.parse(users) : [];
     setUsers(users);
   }
+
   useEffect(() => {
     constructor();
   }, []);
