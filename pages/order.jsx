@@ -279,7 +279,7 @@ export default function Order() {
                                 >
                                     <div className="flex flex-col place-items-start">
                                         <b className="card-title">Order</b>
-                                        <div className="flex flex-col">
+                                        <div className="flex flex-col items-end">
                                             <small className="text-xs opacity-50 mb-1">
                                                 {orders.date}
                                             </small>
@@ -339,7 +339,9 @@ export default function Order() {
                                     <div className="divider"></div>
                                     <div className="flex justify-center mt-2">
                                         <p className="text-sm">
-                                            Terima Kasih Telah Berbelanja
+                                            Terima Kasih Telah Berbelanja <br />
+                                            Atas Kerja Sama Anda, Kami Akan
+                                            Segera Membayar Kembali Uang Anda
                                         </p>
                                     </div>
                                 </div>
