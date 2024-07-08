@@ -171,7 +171,7 @@ export default function Order() {
     newHistory.unshift(orders);
 
     setHistory(newHistory);
-    window.localStorage.setItem("history", JSON.stringify(history));
+    window.localStorage.setItem("history", JSON.stringify(newHistory));
 
     setOrders(initialOrder);
   }
@@ -201,7 +201,7 @@ export default function Order() {
       .toDataURL("image/png")
       .replace("image/png", "image/octet-stream");
     const a = document.createElement("a");
-    a.setAttribute("download", `${orders.date + " " + orders.id} .png`);
+    a.setAttribute("download", `${orders.date + " " + orders.id}.png`);
     a.setAttribute("href", image);
     a.click();
   }
