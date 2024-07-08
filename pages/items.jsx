@@ -442,68 +442,6 @@ export default function Items() {
           </div>
         )}
 
-        <h1 className="text-xl font-bold text-base-content pl-6 pb-2 pt-4">
-          Users
-        </h1>
-
-        <div className="ml-4 mt-4">
-          <label
-            onClick={() => setUserModal((prev) => !prev)}
-            className="btn btn-sm btn-primary shadow-lg mb-2 mr-2 w-44 select-none hover:animate-pulse"
-          >
-            <span>+ Add User</span>
-          </label>
-        </div>
-        <div className="modal-box relative">
-          <div>
-            <form onSubmit={userSubmit}>
-              <h3 className="font-bold text-lg">Add new user</h3>
-              <div className="divider"></div>
-
-              <div className="form-control w-full max-w-xs mb-2">
-                <label className="label">
-                  <span className="label-text">User Name</span>
-                </label>
-                <input
-                  type="text"
-                  name="name"
-                  value={userForm.name}
-                  onChange={(event) => handleUserChange(event)}
-                  placeholder="e.g. John Doe"
-                  className="input input-bordered text-base w-full max-w-xs"
-                  required
-                />
-              </div>
-
-              <div className="form-control w-full max-w-xs mb-2">
-                <label className="label">
-                  <span className="label-text">Role</span>
-                </label>
-                <input
-                  type="text"
-                  name="role"
-                  value={userForm.role}
-                  onChange={(event) => handleUserChange(event)}
-                  placeholder="e.g. Admin"
-                  className="input input-bordered text-base w-full max-w-xs"
-                  required
-                />
-              </div>
-
-              <div className="modal-action">
-                <label
-                  htmlFor="user-modal"
-                  className="btn bg-none"
-                  onClick={() => setUserModal((prev) => !prev)}
-                >
-                  Cancel
-                </label>
-                <button className="btn btn-success">Save</button>
-              </div>
-            </form>
-          </div>
-        </div>
-
         {/* category modal */}
         <div
           className={`modal modal-bottom sm:modal-middle ${

@@ -67,6 +67,15 @@ export default function History() {
     });
   }
 
+  function shareToWhatsApp() {
+    const input = document.getElementById("screenshot");
+    html2canvas(input).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png");
+      const waUrl = `https://wa.me/?text=${encodeURIComponent(imgData)}`;
+      window.open(waUrl, "_blank");
+    });
+  }
+
   let historyList = history?.map((obj) => {
     let itemList = "";
     obj.items.map((item) => (itemList += item.item + " x" + item.qty + " | "));
@@ -253,6 +262,9 @@ export default function History() {
             <div className="modal-action">
               <button onClick={downloadReceipt} className="btn btn-primary">
                 Download Struk
+              </button>
+              <button onClick={shareToWhatsApp} className="btn btn-success">
+                Share ke WA
               </button>
               <label
                 onClick={() => setDetailModal((prev) => !prev)}
