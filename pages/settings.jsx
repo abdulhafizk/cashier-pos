@@ -119,6 +119,31 @@ export default function Exports() {
         window.localStorage.setItem('items', JSON.stringify(itemsPreview))
         router.push('items')
     }
+
+    function downloadSampleXlsx() {
+        const sampleData = [
+            {
+                id: 1,
+                item: 'Sample Item 1',
+                category: 'Sample Category 1',
+                stock: 100,
+                price: 10000,
+            },
+            {
+                id: 2,
+                item: 'Sample Item 2',
+                category: 'Sample Category 2',
+                stock: 200,
+                price: 20000,
+            },
+        ]
+        const worksheet = XLSX.utils.json_to_sheet(sampleData)
+        const workbook = XLSX.utils.book_new()
+        XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1')
+        const fileName = 'SampleData.xlsx'
+        XLSX.writeFile(workbook, fileName)
+    }
+
     return (
         <>
             <Head>
@@ -141,6 +166,13 @@ export default function Exports() {
                             className="btn btn-sm btn-success shadow-lg mb-2 ml-4 w-44 select-none hover:animate-pulse"
                         >
                             <span>Backup Data</span>
+                        </button>
+
+                        <button
+                            onClick={() => downloadSampleXlsx()}
+                            className="btn btn-sm btn-info shadow-lg mb-2 ml-4 w-44 select-none hover:animate-pulse"
+                        >
+                            <span>Download Sample XLSX</span>
                         </button>
 
                         <div className="ml-4">
