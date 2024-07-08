@@ -4,85 +4,44 @@ import { nanoid } from "nanoid";
 import Navbar from "../components/Navbar";
 import Drawer from "../components/Drawer";
 import Head from "next/head";
+import Chat from "../components/Chat";
+import { useState } from "react";
 
-export default function Chat() {
-  const router = useRouter();
+const Chat = () => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
 
-  useEffect(() => {
-    // Simulate fetching messages from a database or API
-    const initialMessages = [
-      {
-        id: nanoid(),
-        text: "Selamat datang di chat kami!",
-        from: "admin",
-      },
-      {
-        id: nanoid(),
-        text: "Bagaimana kami dapat membantu Anda hari ini?",
-        from: "admin",
-      },
-    ];
-    setMessages(initialMessages);
-  }, []);
-
-  const handleSendMessage = (event) => {
-    event.preventDefault();
-    if (newMessage.trim() !== "") {
-      const newMessages = [
-        ...messages,
-        { id: nanoid(), text: newMessage, from: "user" },
-      ];
-      setMessages(newMessages);
-      setNewMessage("");
-    }
+  const handleSendMessage = () => {
+    setMessages([...messages, { text: newMessage, isUser: true }]);
+    setNewMessage("");
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <Head>
-        <title>Chat</title>
-        <meta name="description" content="Chat page" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <Navbar />
-      <Drawer />
-      <div className="w-3/4 bg-white shadow rounded-lg p-4">
-        <div className="flex flex-col">
-          {messages.map((message) => (
-            <div
-              key={message.id}
-              className={`mb-2 ${
-                message.from === "admin" ? "text-right" : "text-left"
-              }`}
-            >
-              <span
-                className={`bg-${
-                  message.from === "admin" ? "blue-500" : "green-500"
-                }-500 text-white py-2 px-4 rounded-full inline-block`}
-              >
-                {message.text}
-              </span>
-            </div>
-          ))}
-        </div>
-        <form onSubmit={handleSendMessage} className="mt-4">
-          <input
-            type="text"
-            value={newMessage}
-            onChange={(event) => setNewMessage(event.target.value)}
-            placeholder="Tulis pesan Anda..."
-            className="w-full p-2 border border-gray-300 rounded"
-          />
-          <button
-            type="submit"
-            className="mt-2 w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300"
+    <div className="chat-container">
+      <div className="chat-header">
+        <h2>Chat</h2>
+      </div>
+      <div className="chat-messages">
+        {messages.map((message, index) => (
+          <div
+            key={index}
+            className={`message ${message.isUser ? "user" : "bot"}`}
           >
-            Kirim
-          </button>
-        </form>
+            <p>{message.text}</p>
+          </div>
+        ))}
+      </div>
+      <div className="chat-input">
+        <input
+          type="text"
+          value={newMessage}
+          onChange={(e) => setNewMessage(e.target.value)}
+          placeholder="Tulis pesan..."
+        />
+        <button onClick={handleSendMessage}>Kirim</button>
       </div>
     </div>
   );
-}
+};
+
+export default Chat;
