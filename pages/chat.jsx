@@ -5,7 +5,6 @@ import Navbar from "../components/Navbar";
 import Drawer from "../components/Drawer";
 import Head from "next/head";
 import Chat from "../components/Chat";
-import { useState } from "react";
 
 const Chat = () => {
   const [messages, setMessages] = useState([]);
