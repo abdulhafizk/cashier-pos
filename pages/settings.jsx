@@ -168,13 +168,6 @@ export default function Exports() {
                             <span>Backup Data</span>
                         </button>
 
-                        <button
-                            onClick={() => downloadSampleXlsx()}
-                            className="btn btn-sm btn-info shadow-lg mb-2 ml-4 w-44 select-none hover:animate-pulse"
-                        >
-                            <span>Download Sample XLSX</span>
-                        </button>
-
                         <div className="ml-4">
                             <input
                                 id="uploadItem"
@@ -203,6 +196,13 @@ export default function Exports() {
                             >
                                 Import Data .XLSX
                             </label>
+
+                            <button
+                                onClick={() => downloadSampleXlsx()}
+                                className="btn btn-sm btn-info shadow-lg mb-2 ml-4 w-44 select-none hover:animate-pulse"
+                            >
+                                <span>Download Sample XLSX</span>
+                            </button>
 
                             {(categoriesPreview?.length > 0 ||
                                 itemsPreview?.length > 0) && (
