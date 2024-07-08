@@ -15,6 +15,7 @@ export default function Order() {
         qtys: 0,
         totals: 0,
         cash: '',
+        user: '',
     }
     const [orders, setOrders] = useState(initialOrder)
     const [categories, setCategories] = useState([])
@@ -41,13 +42,6 @@ export default function Order() {
     function orderInit() {
         if (!orders.id) {
             const date = new Date().toLocaleString('en-us', {
-                day: 'numeric',
-                month: 'short',
-                year: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit',
-            })
-            const cs = new Date().toLocaleString('en-us', {
                 day: 'numeric',
                 month: 'short',
                 year: 'numeric',
@@ -362,11 +356,23 @@ export default function Order() {
                                                         }
                                                     })
                                                 }}
-                                                // onKeyPress={(event) => {
-                                                //     if (!/[0-9]/.test(event.key)) {
-                                                //         event.preventDefault()
-                                                //     }
-                                                // }}
+                                                required
+                                            />
+
+                                            <input
+                                                type="text"
+                                                placeholder="User"
+                                                className="input input-sm mb-2 w-full"
+                                                value={orders.user}
+                                                onChange={(event) => {
+                                                    setOrders((prev) => {
+                                                        return {
+                                                            ...prev,
+                                                            user: event.target
+                                                                .value,
+                                                        }
+                                                    })
+                                                }}
                                                 required
                                             />
                                             <div className="flex justify-between mr-1">
