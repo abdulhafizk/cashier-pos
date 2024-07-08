@@ -17,6 +17,7 @@ export default function Items() {
     callback: null,
   });
   const [users, setUsers] = useState([]);
+  const [userModal, setUserModal] = useState(false);
 
   const initialCategoryForm = {
     id: nanoid(6),
@@ -40,17 +41,24 @@ export default function Items() {
   const [itemForm, setItemForm] = useState(initialItemForm);
   const [updateItemForm, setUpdateItemForm] = useState(initialItemForm);
 
+  const initialUserForm = {
+    id: nanoid(6),
+    name: "",
+    role: "",
+  };
+  const [userForm, setUserForm] = useState(initialUserForm);
+
   function constructor() {
     let categories = window.localStorage.getItem("categories");
-    categories = JSON.parse(categories);
+    categories = JSON.parse(categories) || [];
     setCategories(categories);
 
     let items = window.localStorage.getItem("items");
-    items = JSON.parse(items);
+    items = JSON.parse(items) || [];
     setItems(items);
 
     let users = window.localStorage.getItem("users");
-    users = JSON.parse(users);
+    users = JSON.parse(users) || [];
     setUsers(users);
   }
   useEffect(() => {
@@ -85,11 +93,20 @@ export default function Items() {
       };
     });
   }
+  function handleUserChange(event) {
+    const { name, value } = event.target;
+    setUserForm((prevUserForm) => {
+      return {
+        ...prevUserForm,
+        [name]: value,
+      };
+    });
+  }
 
   // Data handler
   function categorySubmit(event) {
     event.preventDefault();
-    let newCategory = categories;
+    let newCategory = [...categories];
     newCategory.unshift(categoryForm);
     newCategory = JSON.stringify(newCategory);
     window.localStorage.setItem("categories", newCategory);
@@ -110,15 +127,14 @@ export default function Items() {
     newItems = JSON.stringify(newItems);
     window.localStorage.setItem("items", newItems);
 
-    let newCategory = categories;
-    newCategory = newCategory.filter((cat) => cat.id !== id);
+    let newCategory = categories.filter((cat) => cat.id !== id);
     newCategory = JSON.stringify(newCategory);
     window.localStorage.setItem("categories", newCategory);
     constructor();
   }
   function itemSubmit(event) {
     event.preventDefault();
-    let newItem = items;
+    let newItem = [...items];
     newItem.unshift(itemForm);
     newItem = JSON.stringify(newItem);
     window.localStorage.setItem("items", newItem);
@@ -130,7 +146,7 @@ export default function Items() {
     let newItems = [];
     let updateItem = updateItemForm;
     for (let i = 0; i < items.length; i++) {
-      if (items[i].id != updateItem.id) {
+      if (items[i].id !== updateItem.id) {
         newItems.push(items[i]);
       } else {
         newItems.push(updateItem);
@@ -141,18 +157,23 @@ export default function Items() {
     setItemUpdateModal((prev) => !prev);
   }
   function itemDelete(id) {
-    const newItems = [];
-    for (let i = 0; i < items.length; i++) {
-      if (items[i].id != id) {
-        newItems.push(items[i]);
-      }
-    }
+    const newItems = items.filter((item) => item.id !== id);
     setItems(newItems);
     window.localStorage.setItem("items", JSON.stringify(newItems));
   }
   function openItemUpdate(obj) {
     setItemUpdateModal((prev) => !prev);
     setUpdateItemForm(obj);
+  }
+
+  function userSubmit(event) {
+    event.preventDefault();
+    let newUser = [...users];
+    newUser.unshift(userForm);
+    newUser = JSON.stringify(newUser);
+    window.localStorage.setItem("users", newUser);
+    setUserForm(initialUserForm);
+    setUserModal((prev) => !prev);
   }
 
   function confirm(message, callback) {
@@ -162,7 +183,7 @@ export default function Items() {
       };
     }
     if (message == null) {
-      let message = "Confirm action";
+      message = "Confirm action";
     }
     setConfirmModal((prev) => {
       return { isOpen: !prev.isOpen, message, callback };
@@ -397,6 +418,14 @@ export default function Items() {
           Users
         </h1>
 
+        <div className="ml-4 mt-4">
+          <label
+            onClick={() => setUserModal((prev) => !prev)}
+            className="btn btn-sm btn-primary shadow-lg mb-2 mr-2 w-44 select-none hover:animate-pulse"
+          >
+            <span>+ Add User</span>
+          </label>
+        </div>
         {users?.length > 0 ? (
           <div className="flex flex-col pt-4 pl-4 mr-2 max-w-4xl">
             <div className="overflow-x-auto overflow-scroll overflow-y-hidden">
