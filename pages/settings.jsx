@@ -156,19 +156,19 @@ export default function Exports() {
                             Categories & Items
                         </h1>
 
-                        <button
-                            onClick={() =>
-                                downloadJson(
-                                    { categories, items },
-                                    'CookiePOS items'
-                                )
-                            }
-                            className="btn btn-sm btn-success shadow-lg mb-2 ml-4 w-44 select-none hover:animate-pulse"
-                        >
-                            <span>Backup Data</span>
-                        </button>
-
                         <div className="ml-4">
+                            <button
+                                onClick={() =>
+                                    downloadJson(
+                                        { categories, items },
+                                        'CookiePOS items'
+                                    )
+                                }
+                                className="btn btn-sm btn-success shadow-lg mb-2 w-44 select-none hover:animate-pulse"
+                            >
+                                <span>Backup Data</span>
+                            </button>
+
                             <input
                                 id="uploadItem"
                                 type="file"
