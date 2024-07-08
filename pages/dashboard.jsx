@@ -409,12 +409,15 @@ export default function Dashboard({ constructor }) {
                         </pre>
                         <pre data-prefix=">" className="">
                             <code>
-                                V1.1{' '}
+                                V1.0{' '}
                                 <span className="opacity-20">
                                     {' '}
-                                    - 15 Sep 2022 -{' '}
+                                    - 08 Juli 2024 -{' '}
                                 </span>
                             </code>
+                            <pre data-prefix="" className="opacity-50">
+                                <code>- Welcome To CookiePOS!</code>
+                            </pre>
                         </pre>
                         <pre data-prefix="" className="opacity-50">
                             <code>- Bug Fixes</code>
@@ -430,18 +433,6 @@ export default function Dashboard({ constructor }) {
                         </pre>
                         <pre data-prefix="" className="opacity-50">
                             <code>- Custom themes!</code>
-                        </pre>
-                        <pre data-prefix=">" className="">
-                            <code>
-                                V1.0{' '}
-                                <span className="opacity-20">
-                                    {' '}
-                                    - 7 Sep 2022 -{' '}
-                                </span>
-                            </code>
-                        </pre>
-                        <pre data-prefix="" className="opacity-50">
-                            <code>- Welcome To CookiePOS!</code>
                         </pre>
                     </div>
                 </div>

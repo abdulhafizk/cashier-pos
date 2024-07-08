@@ -46,6 +46,7 @@ export default function Order() {
                 year: 'numeric',
                 hour: '2-digit',
                 minute: '2-digit',
+                second: '2-digit',
             })
             setOrders((prev) => {
                 return { ...prev, id: nanoid(6), date }
@@ -200,7 +201,7 @@ export default function Order() {
         a.setAttribute('href', image)
         a.click()
     }
-    
+
     const categoryList = categories?.map((cat) => (
         <CategoryCard
             key={cat.id}
@@ -270,7 +271,6 @@ export default function Order() {
 
                     <div className="flex mt-2 md:mr-2">
                         <div className="mx-auto mb-8">
-
                             <div className="card bg-base-300 w-72 text-base-content shadow-xl">
                                 {/* struct print area */}
                                 <div
@@ -351,7 +351,8 @@ export default function Order() {
                                                     setOrders((prev) => {
                                                         return {
                                                             ...prev,
-                                                            cash: event.target.value,
+                                                            cash: event.target
+                                                                .value,
                                                         }
                                                     })
                                                 }}
@@ -364,14 +365,21 @@ export default function Order() {
                                             />
                                             <div className="flex justify-between mr-1">
                                                 <div
-                                                    className={`btn ${orders.qtys<=0?"btn-disabled":"btn-ghost"} w-1/2 btn-md mr-1`}
+                                                    className={`btn ${
+                                                        orders.qtys <= 0
+                                                            ? 'btn-disabled'
+                                                            : 'btn-ghost'
+                                                    } w-1/2 btn-md mr-1`}
                                                     onClick={() =>
                                                         setOrders(initialOrder)
                                                     }
                                                 >
                                                     Clear
                                                 </div>
-                                                <button className="btn btn-warning w-1/2 btn-md flex" disabled={orders.qtys<=0}>
+                                                <button
+                                                    className="btn btn-warning w-1/2 btn-md flex"
+                                                    disabled={orders.qtys <= 0}
+                                                >
                                                     Checkout
                                                 </button>
                                             </div>
@@ -379,10 +387,8 @@ export default function Order() {
                                     </div>
                                 </div>
                             </div>
-                            
                         </div>
                     </div>
-
                 </div>
             </GlobalDataProvider>
         </>
