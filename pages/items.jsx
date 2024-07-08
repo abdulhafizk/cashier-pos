@@ -16,6 +16,8 @@ export default function Items() {
         message: '',
         callback: null,
     })
+    const [userModal, setUserModal] = useState(false)
+    const [users, setUsers] = useState([])
 
     const initialCategoryForm = {
         id: nanoid(6),
@@ -39,6 +41,14 @@ export default function Items() {
     const [itemForm, setItemForm] = useState(initialItemForm)
     const [updateItemForm, setUpdateItemForm] = useState(initialItemForm)
 
+    const initialUserForm = {
+        id: nanoid(6),
+        name: '',
+        role: 'user',
+        email: '',
+    }
+    const [userForm, setUserForm] = useState(initialUserForm)
+
     function constructor() {
         let categories = window.localStorage.getItem('categories')
         categories = JSON.parse(categories)
@@ -47,6 +57,10 @@ export default function Items() {
         let items = window.localStorage.getItem('items')
         items = JSON.parse(items)
         setItems(items)
+
+        let users = window.localStorage.getItem('users')
+        users = JSON.parse(users)
+        setUsers(users)
     }
     useEffect(() => {
         constructor()
@@ -76,6 +90,15 @@ export default function Items() {
         setUpdateItemForm((prev) => {
             return {
                 ...prev,
+                [name]: value,
+            }
+        })
+    }
+    function handleUserChange(event) {
+        const { name, value } = event.target
+        setUserForm((prevUserForm) => {
+            return {
+                ...prevUserForm,
                 [name]: value,
             }
         })
@@ -151,6 +174,25 @@ export default function Items() {
     function openItemUpdate(obj) {
         setItemUpdateModal((prev) => !prev)
         setUpdateItemForm(obj)
+    }
+    function userSubmit(event) {
+        event.preventDefault()
+        let newUser = users
+        newUser.unshift(userForm)
+        newUser = JSON.stringify(newUser)
+        window.localStorage.setItem('users', newUser)
+        setUserForm(initialUserForm)
+        setUserModal((prev) => !prev)
+    }
+    function userDelete(id) {
+        let newUsers = users.filter((user) => user.id !== id)
+        setUsers(newUsers)
+        newUsers = JSON.stringify(newUsers)
+        window.localStorage.setItem('users', newUsers)
+    }
+    function openUserUpdate(obj) {
+        setUserModal((prev) => !prev)
+        setUserForm(obj)
     }
 
     function confirm(message, callback) {
@@ -700,7 +742,6 @@ export default function Items() {
                     </div>
                 </div>
                 {/* Users Modal */}
-                {/* --------- */}
                 <div
                     className={`modal modal-bottom sm:modal-middle ${
                         userModal && 'modal-open'
