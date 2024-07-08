@@ -4,10 +4,10 @@ import Drawer from './Drawer'
 
 export default function GlobalDataProvider({ children }) {
     const [theme, setTheme] = useState('night')
-    // function changeTheme(newTheme) {
-    //     window.localStorage.setItem('theme', newTheme)
-    //     setTheme(newTheme)
-    // }
+    function changeTheme(newTheme) {
+        window.localStorage.setItem('theme', newTheme)
+        setTheme(newTheme)
+    }
     function themeInit() {
         setTheme(window.localStorage.getItem('theme'))
     }
