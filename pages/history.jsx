@@ -255,7 +255,7 @@ export default function History() {
               <div className="text-center mt-2">
                 <p className="text-sm">Terima Kasih Telah Berbelanja</p>
                 <p className="text-sm">Saran & Kritik</p>
-                <p className="text-sm">+62 822-4713-4797</p>
+                <p className="text-sm">0822-4713-4797</p>
               </div>
             </div>
 

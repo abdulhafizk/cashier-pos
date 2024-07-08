@@ -272,48 +272,24 @@ export default function Exports() {
                   router.push("items");
                 }
               }}
-              className="btn btn-sm btn-error shadow-lg mb-2 ml-4 w-44 select-none hover:animate-pulse"
+              className="btn btn-sm btn-error shadow-lg w-44 select-none hover:animate-pulse ml-4 my-8"
             >
-              <span>Delete Data</span>
+              <span>Delete All Data</span>
             </button>
           </div>
-          <div className="flex flex-col lg:w-[80vw] h-full mt-6">
+
+          <div className="flex flex-col lg:w-[80vw] h-full">
             <h1 className="text-xl font-bold text-base-content pt-6 pl-6 pb-6">
-              History
+              Sales History
             </h1>
-            <div className="flex flex-col ml-4 space-y-2">
+            <div className="ml-4">
               <button
                 onClick={() => downloadExcel(historyItemStringify())}
                 className="btn btn-sm btn-success shadow-lg w-44 select-none hover:animate-pulse"
               >
-                <span>Export .xlsx</span>
-              </button>
-
-              <button
-                onClick={() => {
-                  if (confirm("Delete history?")) {
-                    window.localStorage.setItem("history", "[]");
-                    router.push("history");
-                  }
-                }}
-                className="btn btn-sm btn-error shadow-lg w-44 select-none hover:animate-pulse"
-              >
-                <span>Delete History</span>
+                <span>Download .xlsx</span>
               </button>
             </div>
-          </div>
-          <div className="flex flex-col lg:w-[80vw] h-full mt-6">
-            <h1 className="text-xl font-bold text-base-content pt-6 pl-6 pb-6">
-              General
-            </h1>
-            <a
-              href="https://github.com/madvier83/next-kasir/issues"
-              target="_blank"
-              rel="noreferrer"
-              className="btn btn-sm btn-error shadow-lg mb-2 ml-4 w-44 select-none hover:animate-pulse"
-            >
-              <span>Report Issue</span>
-            </a>
           </div>
         </div>
       </GlobalDataProvider>
