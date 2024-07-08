@@ -79,16 +79,16 @@ export default function Dashboard({ constructor }) {
         constructor()
     }, [])
 
-    useEffect(() => {
-        async function getStar() {
-            let star = await fetch(
-                'https://api.github.com/repos/abdulhafizk/cashier-pos'
-            )
-            star = await star.json()
-            setStargazer(star.stargazers_count)
-        }
-        getStar()
-    }, [])
+    // useEffect(() => {
+    //     async function getStar() {
+    //         let star = await fetch(
+    //             'https://api.github.com/repos/abdulhafizk/cashier-pos'
+    //         )
+    //         star = await star.json()
+    //         setStargazer(star.stargazers_count)
+    //     }
+    //     getStar()
+    // }, [])
 
     return (
         <>
