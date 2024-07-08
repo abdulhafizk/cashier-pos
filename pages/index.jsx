@@ -4,33 +4,21 @@ import styles from "../styles/Home.module.css";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
-// export default function Home() {
-//   const router = useRouter();
-//   useEffect(() => {
-//     router.push("dashboard");
-//   }, []);
-//   return (
-//     <div className={styles.container}>
-//       <Head>
-//         <title>HK Mart</title>
-//         <meta name="description" content="free cashier app" />
-//       </Head>
+export default function Home() {
+  const router = useRouter();
+  useEffect(() => {
+    router.push("dashboard");
+  }, []);
+  return (
+    <div className={styles.container}>
+      <Head>
+        <title>HK Mart</title>
+        <meta name="description" content="free cashier app" />
+      </Head>
 
-//       <main className={styles.main}>
-//         <h1 className={styles.title}>Loading dashboard...</h1>
-//       </main>
-//     </div>
-//   );
-// }
-
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./app";
-import "./styles.css";
-
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+      <main className={styles.main}>
+        <h1 className={styles.title}>Loading dashboard...</h1>
+      </main>
+    </div>
+  );
+}
