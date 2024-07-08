@@ -337,12 +337,12 @@ export default function Order() {
                                         </b>
                                     </div>
                                     <div className="divider"></div>
-                                    <div className="flex justify-center mt-2">
+                                    <div className="text-center mt-2">
                                         <p className="text-sm">
-                                            Terima Kasih Telah Berbelanja <br />
-                                            Atas Kerja Sama Anda, Kami Akan
-                                            Segera Membayar Kembali Uang Anda
+                                            Terima Kasih Telah Berbelanja
                                         </p>
+                                        <p>Saran & Kritik</p>
+                                        <p>+62 822-4713-4797</p>
                                     </div>
                                 </div>
 
