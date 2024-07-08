@@ -61,7 +61,7 @@ export default function Dashboard({ constructor }) {
         }
         setProgress(current)
     }
-    useEffect(()=>{
+    useEffect(() => {
         countProgress()
     }, [setup])
 
@@ -81,7 +81,9 @@ export default function Dashboard({ constructor }) {
 
     useEffect(() => {
         async function getStar() {
-            let star = await fetch("https://api.github.com/repos/madvier83/next-kasir")
+            let star = await fetch(
+                'https://api.github.com/repos/abdulhafizk/cashier-pos'
+            )
             star = await star.json()
             setStargazer(star.stargazers_count)
         }
@@ -95,15 +97,19 @@ export default function Dashboard({ constructor }) {
             </Head>
             <GlobalDataProvider>
                 <div className="flex flex-col">
-                    
-                    <div className={`flex ${setup.history?"flex-col-reverse":"flex-col"}`}>
-
-                        <div className="m-4 mb-8 flex flex-col md:flex-row max-w-4xl select-none">
-
+                    <div
+                        className={`flex ${
+                            setup.history ? 'flex-col-reverse' : 'flex-col'
+                        }`}
+                    >
+                        {/* <div className="m-4 mb-8 flex flex-col md:flex-row max-w-4xl select-none">
                             <div className="stat">
                                 <div className="stat-figure text-primary">
-
-                                    <a href="https://github.com/madvier83/next-kasir" target="_blank" rel='noreferrer'>
+                                    <a
+                                        href="https://github.com/madvier83/next-kasir"
+                                        target="_blank"
+                                        rel="noreferrer"
+                                    >
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             fill="none"
@@ -120,10 +126,12 @@ export default function Dashboard({ constructor }) {
                                     </a>
                                 </div>
                                 <div className="stat-title">GitHub Stars</div>
-                                    <div className="stat-value text-primary">
-                                        {stargazer}
-                                    </div>
-                                <div className="stat-desc">0% more than last month</div>
+                                <div className="stat-value text-primary">
+                                    {stargazer}
+                                </div>
+                                <div className="stat-desc">
+                                    0% more than last month
+                                </div>
                             </div>
 
                             <div className="stat">
@@ -143,14 +151,22 @@ export default function Dashboard({ constructor }) {
                                     </svg>
                                 </div>
                                 <div className="stat-title">Page Views</div>
-                                <div className="stat-value text-secondary">0.1K</div>
-                                <div className="stat-desc">0% more than last month</div>
+                                <div className="stat-value text-secondary">
+                                    0.1K
+                                </div>
+                                <div className="stat-desc">
+                                    0% more than last month
+                                </div>
                             </div>
 
                             <div className="stat">
                                 <div className="stat-figure text-secondary">
                                     <div className="avatar online">
-                                        <a href="https://github.com/madvier83" target="_blank" rel="noreferrer">
+                                        <a
+                                            href="https://github.com/madvier83"
+                                            target="_blank"
+                                            rel="noreferrer"
+                                        >
                                             <div className="w-16 mask mask-circle">
                                                 <img src="https://avatars.githubusercontent.com/u/54396887?v=4" />
                                             </div>
@@ -158,7 +174,9 @@ export default function Dashboard({ constructor }) {
                                     </div>
                                 </div>
                                 <div className="stat-value">100%</div>
-                                <div className="stat-title">Free & Open Source</div>
+                                <div className="stat-title">
+                                    Free & Open Source
+                                </div>
                                 <a
                                     target="_blank"
                                     href="https://github.com/madvier83/next-kasir"
@@ -168,22 +186,26 @@ export default function Dashboard({ constructor }) {
                                     View On GitHub
                                 </a>
                             </div>
-                        </div>
+                        </div> */}
 
                         <div className="flex flex-wrap md:flex-nowrap mx-2 mt-4 md:m-4 max-w-4xl">
                             {!setup?.history ? (
                                 <div className="w-full h-58 lg:w-2/3">
                                     <div className="card w-full image-full bg-primary">
                                         <div className="card-body">
-                                            <h2 className="card-title">Welcome!</h2>
+                                            <h2 className="card-title">
+                                                Welcome!
+                                            </h2>
                                             <p>
-                                                Welcome to CookiePOS, a free and open
-                                                source point of sales app!
+                                                Welcome to CookiePOS, a free and
+                                                open source point of sales app!
                                             </p>
                                             <div className="card-actions justify-end">
                                                 <button
                                                     className="btn btn-primary mt-4"
-                                                    onClick={() => router.push('items')}
+                                                    onClick={() =>
+                                                        router.push('items')
+                                                    }
                                                 >
                                                     Get Started
                                                 </button>
@@ -214,7 +236,9 @@ export default function Dashboard({ constructor }) {
                                                             d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"
                                                         />
                                                     </svg>
-                                                    <h2>{getItemsSold().items}</h2>
+                                                    <h2>
+                                                        {getItemsSold().items}
+                                                    </h2>
                                                 </div>
                                                 <div className="stat-actions">
                                                     <button
@@ -241,7 +265,9 @@ export default function Dashboard({ constructor }) {
                                                     <button
                                                         className="btn btn-sm btn-neutral"
                                                         onClick={() =>
-                                                            router.push('history')
+                                                            router.push(
+                                                                'history'
+                                                            )
                                                         }
                                                     >
                                                         History
@@ -253,7 +279,11 @@ export default function Dashboard({ constructor }) {
                                 </div>
                             )}
 
-                            <div className={`my-2 md:my-0 md:ml-4 w-full h-full ${progress==100&&"opacity-40"}`}>
+                            <div
+                                className={`my-2 md:my-0 md:ml-4 w-full h-full ${
+                                    progress == 100 && 'opacity-40'
+                                }`}
+                            >
                                 <div className="card w-full image-full card-compact">
                                     <div className="card-body bg-base-300">
                                         <div className="flex my-4">
@@ -288,7 +318,9 @@ export default function Dashboard({ constructor }) {
                                                             setup.categories &&
                                                             'text-success opacity-70 cursor-pointer'
                                                         }`}
-                                                        onClick={()=>router.push("items")}
+                                                        onClick={() =>
+                                                            router.push('items')
+                                                        }
                                                     >
                                                         Set Categories
                                                     </p>
@@ -298,7 +330,8 @@ export default function Dashboard({ constructor }) {
                                                         type="checkbox"
                                                         className="checkbox mr-2"
                                                         checked={
-                                                            setup.items && 'checked'
+                                                            setup.items &&
+                                                            'checked'
                                                         }
                                                         disabled
                                                     />
@@ -307,7 +340,9 @@ export default function Dashboard({ constructor }) {
                                                             setup.items &&
                                                             'text-success opacity-70 cursor-pointer'
                                                         }`}
-                                                        onClick={()=>router.push("items")}
+                                                        onClick={() =>
+                                                            router.push('items')
+                                                        }
                                                     >
                                                         Add Items
                                                     </p>
@@ -317,7 +352,8 @@ export default function Dashboard({ constructor }) {
                                                         type="checkbox"
                                                         className="checkbox mr-2"
                                                         checked={
-                                                            setup.history && 'checked'
+                                                            setup.history &&
+                                                            'checked'
                                                         }
                                                         disabled
                                                     />
@@ -326,7 +362,9 @@ export default function Dashboard({ constructor }) {
                                                             setup.history &&
                                                             'text-success opacity-70 cursor-pointer'
                                                         }`}
-                                                        onClick={()=>router.push("order")}
+                                                        onClick={() =>
+                                                            router.push('order')
+                                                        }
                                                     >
                                                         Take Orders
                                                     </p>
@@ -348,7 +386,11 @@ export default function Dashboard({ constructor }) {
                                                             setup.history &&
                                                             'text-success opacity-70 cursor-pointer'
                                                         }`}
-                                                        onClick={()=>router.push("settings")}
+                                                        onClick={() =>
+                                                            router.push(
+                                                                'settings'
+                                                            )
+                                                        }
                                                     >
                                                         Backup your data
                                                     </p>
@@ -359,19 +401,48 @@ export default function Dashboard({ constructor }) {
                                 </div>
                             </div>
                         </div>
-                    
                     </div>
 
                     <div className="mockup-code max-w-4xl mx-3 md:mx-4 mb-16 bg-base-300 text-base-content">
-                        <pre data-prefix="$" className="font-semibold"><code>What's new</code></pre>
-                        <pre data-prefix=">" className=""><code>V1.1 <span className='opacity-20'> - 15 Sep 2022 - </span></code></pre>
-                        <pre data-prefix="" className="opacity-50"><code>- Bug Fixes</code></pre>
-                        <pre data-prefix="" className="opacity-50"><code>- Mobile interface improvements</code></pre>
-                        <pre data-prefix="" className="opacity-50"><code>- Restore data now has previews</code></pre>
-                        <pre data-prefix="" className="opacity-50"><code>- Export history to xlsx format</code></pre>
-                        <pre data-prefix="" className="opacity-50"><code>- Custom themes!</code></pre>
-                        <pre data-prefix=">" className=""><code>V1.0 <span className='opacity-20'> - 7 Sep 2022 - </span></code></pre>
-                        <pre data-prefix="" className="opacity-50"><code>- Welcome To CookiePOS!</code></pre>
+                        <pre data-prefix="$" className="font-semibold">
+                            <code>What's new</code>
+                        </pre>
+                        <pre data-prefix=">" className="">
+                            <code>
+                                V1.1{' '}
+                                <span className="opacity-20">
+                                    {' '}
+                                    - 15 Sep 2022 -{' '}
+                                </span>
+                            </code>
+                        </pre>
+                        <pre data-prefix="" className="opacity-50">
+                            <code>- Bug Fixes</code>
+                        </pre>
+                        <pre data-prefix="" className="opacity-50">
+                            <code>- Mobile interface improvements</code>
+                        </pre>
+                        <pre data-prefix="" className="opacity-50">
+                            <code>- Restore data now has previews</code>
+                        </pre>
+                        <pre data-prefix="" className="opacity-50">
+                            <code>- Export history to xlsx format</code>
+                        </pre>
+                        <pre data-prefix="" className="opacity-50">
+                            <code>- Custom themes!</code>
+                        </pre>
+                        <pre data-prefix=">" className="">
+                            <code>
+                                V1.0{' '}
+                                <span className="opacity-20">
+                                    {' '}
+                                    - 7 Sep 2022 -{' '}
+                                </span>
+                            </code>
+                        </pre>
+                        <pre data-prefix="" className="opacity-50">
+                            <code>- Welcome To CookiePOS!</code>
+                        </pre>
                     </div>
                 </div>
             </GlobalDataProvider>
