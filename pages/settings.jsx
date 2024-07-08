@@ -17,18 +17,20 @@ export default function Exports() {
   const [categoriesPreview, setCategoriesPreview] = useState([]);
 
   function constructor() {
-    let history = JSON.parse(window.localStorage.getItem("history"));
+    let history = JSON.parse(window.localStorage.getItem("history")) || [];
     setHistory(history);
-    let items = JSON.parse(window.localStorage.getItem("items"));
+    let items = JSON.parse(window.localStorage.getItem("items")) || [];
     setItems(items);
-    let categories = JSON.parse(window.localStorage.getItem("categories"));
+    let categories =
+      JSON.parse(window.localStorage.getItem("categories")) || [];
     setCategories(categories);
   }
+
   useEffect(() => {
     constructor();
   }, []);
 
-  // Conver items json to sting for xlsx
+  // Convert items json to string for xlsx
   function historyItemStringify() {
     let newHistory = [];
     for (let i = 0; i < history.length; i++) {
@@ -45,6 +47,7 @@ export default function Exports() {
     }
     return newHistory;
   }
+
   function downloadExcel(data) {
     const worksheet = XLSX.utils.json_to_sheet(data);
     const workbook = XLSX.utils.book_new();
@@ -59,6 +62,7 @@ export default function Exports() {
     const fileName = "CookiePOS History " + date + ".xlsx";
     XLSX.writeFile(workbook, fileName);
   }
+
   function downloadJson(data, title) {
     const date = new Date().toLocaleString("en-us", {
       day: "numeric",
@@ -88,9 +92,9 @@ export default function Exports() {
     reader.onload = onReaderLoad;
     reader.readAsText(event.target.files[0]);
   }
+
   function onReaderLoad(event) {
     var obj = JSON.parse(event.target.result);
-    // console.log(obj)
     setItemsPreview(obj.items);
     setCategoriesPreview(obj.categories);
   }
@@ -155,12 +159,12 @@ export default function Exports() {
               Categories & Items
             </h1>
 
-            <div className="ml-4">
+            <div className="flex flex-col ml-4 space-y-2">
               <button
                 onClick={() =>
                   downloadJson({ categories, items }, "CookiePOS items")
                 }
-                className="btn btn-sm btn-success shadow-lg mb-2 w-44 select-none hover:animate-pulse"
+                className="btn btn-sm btn-success shadow-lg w-44 select-none hover:animate-pulse"
               >
                 <span>Backup Data</span>
               </button>
@@ -174,7 +178,7 @@ export default function Exports() {
               />
               <label
                 htmlFor="uploadItem"
-                className="btn btn-sm btn-info shadow-lg mb-2 w-44 select-none hover:animate-pulse"
+                className="btn btn-sm btn-info shadow-lg w-44 select-none hover:animate-pulse"
               >
                 Restore Data
               </label>
@@ -188,14 +192,14 @@ export default function Exports() {
               />
               <label
                 htmlFor="uploadXlsxItem"
-                className="btn btn-sm btn-info shadow-lg mb-2 w-44 select-none hover:animate-pulse"
+                className="btn btn-sm btn-info shadow-lg w-44 select-none hover:animate-pulse"
               >
                 Import Data .XLSX
               </label>
 
               <button
                 onClick={() => downloadSampleXlsx()}
-                className="btn btn-sm btn-info shadow-lg mb-2 ml-4 w-44 select-none hover:animate-pulse"
+                className="btn btn-sm btn-info shadow-lg w-44 select-none hover:animate-pulse"
               >
                 <span>Download Sample XLSX</span>
               </button>
@@ -236,7 +240,7 @@ export default function Exports() {
                     </table>
                   </div>
 
-                  <div className="flex flex-wrap justify-end items-center mt-8 mx-4 mb-4">
+                  <div className="flex flex-wrap justify-end items-center mt-8 mx-4 mb-4 space-x-2">
                     <b className="font-semibold text-sm md:text-lg my-2">
                       Previous items & categories will be deleted!
                     </b>
@@ -245,13 +249,13 @@ export default function Exports() {
                         setCategoriesPreview([]);
                         setItemsPreview([]);
                       }}
-                      className="btn btn-sm btn-error shadow-lg mb-2 ml-12 w-24 select-none hover:animate-pulse"
+                      className="btn btn-sm btn-error shadow-lg w-24 select-none hover:animate-pulse"
                     >
                       <span>Cancel</span>
                     </button>
                     <button
                       onClick={() => restore()}
-                      className="btn btn-sm btn-success shadow-lg mb-2 ml-2 w-24 select-none hover:animate-pulse"
+                      className="btn btn-sm btn-success shadow-lg w-24 select-none hover:animate-pulse"
                     >
                       <span>Save</span>
                     </button>
@@ -273,49 +277,44 @@ export default function Exports() {
               <span>Delete Data</span>
             </button>
           </div>
-          <div className="flex flex-col lg:w-[80vw] h-full">
+          <div className="flex flex-col lg:w-[80vw] h-full mt-6">
             <h1 className="text-xl font-bold text-base-content pt-6 pl-6 pb-6">
               History
             </h1>
-            <button
-              onClick={() => downloadExcel(historyItemStringify())}
-              className="btn btn-sm btn-success shadow-lg mb-2 ml-4 w-44 select-none hover:animate-pulse"
-            >
-              <span>Export .xlsx</span>
-            </button>
+            <div className="flex flex-col ml-4 space-y-2">
+              <button
+                onClick={() => downloadExcel(historyItemStringify())}
+                className="btn btn-sm btn-success shadow-lg w-44 select-none hover:animate-pulse"
+              >
+                <span>Export .xlsx</span>
+              </button>
 
-            <button
-              onClick={() => {
-                if (confirm("Delete history?")) {
-                  window.localStorage.setItem("history", "[]");
-                  router.push("history");
-                }
-              }}
+              <button
+                onClick={() => {
+                  if (confirm("Delete history?")) {
+                    window.localStorage.setItem("history", "[]");
+                    router.push("history");
+                  }
+                }}
+                className="btn btn-sm btn-error shadow-lg w-44 select-none hover:animate-pulse"
+              >
+                <span>Delete History</span>
+              </button>
+            </div>
+          </div>
+          <div className="flex flex-col lg:w-[80vw] h-full mt-6">
+            <h1 className="text-xl font-bold text-base-content pt-6 pl-6 pb-6">
+              General
+            </h1>
+            <a
+              href="https://github.com/madvier83/next-kasir/issues"
+              target="_blank"
+              rel="noreferrer"
               className="btn btn-sm btn-error shadow-lg mb-2 ml-4 w-44 select-none hover:animate-pulse"
             >
-              <span>Delete History</span>
-            </button>
-
-            {/* <button
-                            onClick={() => downloadJson(history, "CookiePOS items")}
-                            className="btn btn-sm btn-warning shadow-lg mb-2 ml-4 w-44 select-none hover:animate-pulse"
-                            disabled
-                        >
-                            <span>Backup Data</span>
-                        </button> */}
+              <span>Report Issue</span>
+            </a>
           </div>
-
-          <h1 className="text-xl font-bold text-base-content pt-6 pl-6 pb-6">
-            General
-          </h1>
-          <a
-            href="https://github.com/madvier83/next-kasir/issues"
-            target="_blank"
-            rel="noreferrer"
-            className="btn btn-sm btn-error shadow-lg mb-2 ml-4 w-44 select-none hover:animate-pulse"
-          >
-            <span>Report Issue</span>
-          </a>
         </div>
       </GlobalDataProvider>
     </>

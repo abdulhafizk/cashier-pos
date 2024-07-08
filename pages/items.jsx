@@ -454,7 +454,51 @@ export default function Items() {
             <span>+ Add User</span>
           </label>
         </div>
-        {users?.length > 0 ? (
+        <form onSubmit={userSubmit}>
+          <h3 className="font-bold text-lg">Add new user</h3>
+          <div className="divider"></div>
+
+          <div className="form-control w-full max-w-xs mb-2">
+            <label className="label">
+              <span className="label-text">User Name</span>
+            </label>
+            <input
+              type="text"
+              name="name"
+              value={userForm.name}
+              onChange={handleUserChange}
+              placeholder="e.g. John Doe"
+              className="input input-bordered text-base w-full max-w-xs"
+              required
+            />
+          </div>
+
+          <div className="form-control w-full max-w-xs mb-2">
+            <label className="label">
+              <span className="label-text">Role</span>
+            </label>
+            <input
+              type="text"
+              name="role"
+              value={userForm.role}
+              onChange={handleUserChange}
+              placeholder="e.g. Admin"
+              className="input input-bordered text-base w-full max-w-xs"
+              required
+            />
+          </div>
+
+          <div className="modal-action">
+            <label
+              className="btn bg-none"
+              onClick={() => setUserModal((prev) => !prev)}
+            >
+              Cancel
+            </label>
+            <button className="btn btn-success">Save</button>
+          </div>
+        </form>
+        {/* {users?.length > 0 ? (
           <div className="flex flex-col pt-4 pl-4 mr-2 max-w-4xl">
             <div className="overflow-x-auto overflow-scroll overflow-y-hidden">
               <table className="table table-compact table-zebra mt-4">
@@ -484,7 +528,7 @@ export default function Items() {
           <div className="ml-4 mt-4">
             <h1 className="opacity-50 ml-2">No Users</h1>
           </div>
-        )}
+        )} */}
 
         {/* category modal */}
         <div
