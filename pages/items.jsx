@@ -49,17 +49,21 @@ export default function Items() {
   const [userForm, setUserForm] = useState(initialUserForm);
 
   function constructor() {
-    let categories = window.localStorage.getItem("categories");
-    categories = JSON.parse(categories) || [];
-    setCategories(categories);
+    try {
+      let categories = window.localStorage.getItem("categories");
+      categories = JSON.parse(categories) || [];
+      setCategories(categories);
 
-    let items = window.localStorage.getItem("items");
-    items = JSON.parse(items) || [];
-    setItems(items);
+      let items = window.localStorage.getItem("items");
+      items = JSON.parse(items) || [];
+      setItems(items);
 
-    let users = window.localStorage.getItem("users");
-    users = JSON.parse(users) || [];
-    setUsers(users);
+      let users = window.localStorage.getItem("users");
+      users = JSON.parse(users) || [];
+      setUsers(users);
+    } catch (error) {
+      console.error("Error loading data from localStorage:", error);
+    }
   }
   useEffect(() => {
     constructor();
@@ -106,60 +110,80 @@ export default function Items() {
   // Data handler
   function categorySubmit(event) {
     event.preventDefault();
-    let newCategory = [...categories];
-    newCategory.unshift(categoryForm);
-    newCategory = JSON.stringify(newCategory);
-    window.localStorage.setItem("categories", newCategory);
-    setCategoryForm(initialCategoryForm);
-    setCategoryModal((prev) => !prev);
+    try {
+      let newCategory = [...categories];
+      newCategory.unshift(categoryForm);
+      newCategory = JSON.stringify(newCategory);
+      window.localStorage.setItem("categories", newCategory);
+      setCategoryForm(initialCategoryForm);
+      setCategoryModal((prev) => !prev);
+    } catch (error) {
+      console.error("Error saving category:", error);
+    }
   }
   function categoryDelete(id) {
-    let newItems = [];
-    for (let i = 0; i < items.length; i++) {
-      let sample = items[i];
-      if (JSON.parse(sample.category).id === id) {
-        newItems.push({ ...sample, category: JSON.stringify(uncategorized) });
-      } else {
-        newItems.push({ ...sample });
+    try {
+      let newItems = [];
+      for (let i = 0; i < items.length; i++) {
+        let sample = items[i];
+        if (JSON.parse(sample.category).id === id) {
+          newItems.push({ ...sample, category: JSON.stringify(uncategorized) });
+        } else {
+          newItems.push({ ...sample });
+        }
       }
-    }
-    setItems(newItems);
-    newItems = JSON.stringify(newItems);
-    window.localStorage.setItem("items", newItems);
+      setItems(newItems);
+      newItems = JSON.stringify(newItems);
+      window.localStorage.setItem("items", newItems);
 
-    let newCategory = categories.filter((cat) => cat.id !== id);
-    newCategory = JSON.stringify(newCategory);
-    window.localStorage.setItem("categories", newCategory);
-    constructor();
+      let newCategory = categories.filter((cat) => cat.id !== id);
+      newCategory = JSON.stringify(newCategory);
+      window.localStorage.setItem("categories", newCategory);
+      constructor();
+    } catch (error) {
+      console.error("Error deleting category:", error);
+    }
   }
   function itemSubmit(event) {
     event.preventDefault();
-    let newItem = [...items];
-    newItem.unshift(itemForm);
-    newItem = JSON.stringify(newItem);
-    window.localStorage.setItem("items", newItem);
-    setItemForm(initialItemForm);
-    setItemModal((prev) => !prev);
+    try {
+      let newItem = [...items];
+      newItem.unshift(itemForm);
+      newItem = JSON.stringify(newItem);
+      window.localStorage.setItem("items", newItem);
+      setItemForm(initialItemForm);
+      setItemModal((prev) => !prev);
+    } catch (error) {
+      console.error("Error saving item:", error);
+    }
   }
   function itemUpdate(event) {
     event.preventDefault();
-    let newItems = [];
-    let updateItem = updateItemForm;
-    for (let i = 0; i < items.length; i++) {
-      if (items[i].id !== updateItem.id) {
-        newItems.push(items[i]);
-      } else {
-        newItems.push(updateItem);
+    try {
+      let newItems = [];
+      let updateItem = updateItemForm;
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].id !== updateItem.id) {
+          newItems.push(items[i]);
+        } else {
+          newItems.push(updateItem);
+        }
       }
+      window.localStorage.setItem("items", JSON.stringify(newItems));
+      constructor();
+      setItemUpdateModal((prev) => !prev);
+    } catch (error) {
+      console.error("Error updating item:", error);
     }
-    window.localStorage.setItem("items", JSON.stringify(newItems));
-    constructor();
-    setItemUpdateModal((prev) => !prev);
   }
   function itemDelete(id) {
-    const newItems = items.filter((item) => item.id !== id);
-    setItems(newItems);
-    window.localStorage.setItem("items", JSON.stringify(newItems));
+    try {
+      const newItems = items.filter((item) => item.id !== id);
+      setItems(newItems);
+      window.localStorage.setItem("items", JSON.stringify(newItems));
+    } catch (error) {
+      console.error("Error deleting item:", error);
+    }
   }
   function openItemUpdate(obj) {
     setItemUpdateModal((prev) => !prev);
@@ -168,12 +192,16 @@ export default function Items() {
 
   function userSubmit(event) {
     event.preventDefault();
-    let newUser = [...users];
-    newUser.unshift(userForm);
-    newUser = JSON.stringify(newUser);
-    window.localStorage.setItem("users", newUser);
-    setUserForm(initialUserForm);
-    setUserModal((prev) => !prev);
+    try {
+      let newUser = [...users];
+      newUser.unshift(userForm);
+      newUser = JSON.stringify(newUser);
+      window.localStorage.setItem("users", newUser);
+      setUserForm(initialUserForm);
+      setUserModal((prev) => !prev);
+    } catch (error) {
+      console.error("Error saving user:", error);
+    }
   }
 
   function confirm(message, callback) {
