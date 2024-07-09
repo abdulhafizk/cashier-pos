@@ -32,6 +32,9 @@ export default function Home() {
 
             <main className={styles.main}>
                 <div className={styles.loadingContainer}>
+                    <h1 className={styles.title}>
+                        Point of Sale Cashier Application
+                    </h1>
                     <div className="progress">
                         <div
                             className="progress-bar"
@@ -42,9 +45,6 @@ export default function Home() {
                             aria-valuemax="100"
                         ></div>
                     </div>
-                    <h1 className={styles.title}>
-                        Point of Sale Cashier Application
-                    </h1>
                 </div>
             </main>
         </div>
