@@ -1,11 +1,5 @@
 .container {
     padding: 0 2rem;
-    overflow-y: auto;
-}
-
-html,
-body {
-    overflow: hidden;
 }
 
 .main {
