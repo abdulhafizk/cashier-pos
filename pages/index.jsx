@@ -121,12 +121,7 @@ export default function Home() {
                         Sorry, we couldn’t find the page you’re looking for.
                     </p>
                     <div className="mt-10 flex items-center justify-center gap-x-6">
-                        <a
-                            href="https://github.com/abdulhafizk/cashier-pos"
-                            target="_blank"
-                            rel="noreferrer"
-                            className="ml-2 mb-2 p-0 flex items-center"
-                        >
+                        <a href="https://github.com/abdulhafizk/cashier-pos">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="16"
