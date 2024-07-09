@@ -40,6 +40,7 @@ export default function Home() {
                     <Spinner size="120px" color="red.500" />
                 </div>
             </main>
+            <Spinner size="120px" color="red.500" />
         </div>
     )
 
