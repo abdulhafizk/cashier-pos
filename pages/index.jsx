@@ -25,7 +25,7 @@
 
 import React from 'react'
 import './App.css'
-import welcomeImage from './welcome.png' // Make sure the image is in the src folder
+import welcomeImage from './welcome.png' // Ensure the path is correct
 
 function App() {
     return (
