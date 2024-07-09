@@ -37,7 +37,7 @@ export default function Home() {
                     <h1 className={styles.title}>
                         Point of Sale Cashier Application
                     </h1>
-                    <Spinner size="xl" color="red.500" />
+                    <Spinner size="120px" color="red.500" />
                 </div>
             </main>
         </div>
