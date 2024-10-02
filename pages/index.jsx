@@ -2,6 +2,14 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import {
+    Fade,
+    ScaleFade,
+    Slide,
+    SlideFade,
+    Collapse,
+    Progress,
+} from '@chakra-ui/react'
 
 export default function Home() {
     const router = useRouter()
@@ -9,34 +17,30 @@ export default function Home() {
     useEffect(() => {
         setTimeout(() => {
             router.push('/dashboard')
-        }, 15000)
+        }, 2000)
     }, [])
 
     return (
         <div //className={styles.container}>
         >
             <Head>
-                <title>HK Mart</title>
+                <title>Masycode Cashier System</title>
                 <meta name="description" content="free cashier app" />
             </Head>
 
             <>
-                {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full">
-        <body class="h-full">
-        ```
-      */}
                 <main className="grid min-h-screen place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
                     <div className="text-center">
-                        <p className="text-base font-semibold text-indigo-600">
-                            Welcome to
-                        </p>
-                        <h1 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-                            Masycode Cashier System
-                        </h1>
+                        <SlideFade in offsetX={100}>
+                            <p className="text-base font-semibold text-indigo-600">
+                                Welcome to
+                            </p>
+                        </SlideFade>
+                        <Collapse in={true} animateOpacity>
+                            <h1 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+                                Masycode Cashier System
+                            </h1>
+                        </Collapse>
                         <p className="mt-6 text-base leading-7 text-gray-600">
                             Cashier POS, free cashier app built with nextjs and
                             local storage as database
@@ -65,6 +69,12 @@ export default function Home() {
                                 Contact Support{' '}
                                 <span aria-hidden="true">&rarr;</span>
                             </a>
+                            <Progress
+                                size="xs"
+                                isIndeterminate
+                                colorScheme="indigo"
+                                className="mt-8"
+                            />
                         </div>
                     </div>
                 </main>
