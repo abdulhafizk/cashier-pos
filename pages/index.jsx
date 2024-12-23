@@ -14,18 +14,43 @@ import {
 export default function Home() {
     const router = useRouter()
 
+    // Ganti Halaman
     useEffect(() => {
         setTimeout(() => {
             router.push('/dashboard')
-        }, 2000)
+        }, 10000)
     }, [])
+
+    //text Effect
+    const [typingText, setTypingText] = useState('')
+    const [typingIndex, setTypingIndex] = useState(0)
+    // const [cursorVisible, setCursorVisible] = useState(true)
+    const text = 'Masycode Cashier System'
+
+    useEffect(() => {
+        const typingEffect = setInterval(() => {
+            setTypingText((prevText) => {
+                const newText = text.slice(0, typingIndex + 2)
+                if (newText === text) {
+                    setTypingIndex(45)
+                    setTypingText('')
+                }
+                return newText
+            })
+            setTypingIndex((prevIndex) => prevIndex + 1)
+        }, 250)
+        return () => clearInterval(typingEffect)
+    }, [typingIndex])
 
     return (
         <div //className={styles.container}>
         >
             <Head>
                 <title>Masycode Cashier System</title>
-                <meta name="description" content="free cashier app" />
+                <meta
+                    name="description"
+                    content="Cashier POS, free cashier app built with nextjs and local storage as database"
+                />
             </Head>
 
             <>
@@ -38,7 +63,7 @@ export default function Home() {
                         </SlideFade>
                         <Collapse in={true} animateOpacity>
                             <h1 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-                                Masycode Cashier System
+                                {typingText}
                             </h1>
                         </Collapse>
                         <p className="mt-6 text-base leading-7 text-gray-600">
@@ -69,12 +94,6 @@ export default function Home() {
                                 Contact Support{' '}
                                 <span aria-hidden="true">&rarr;</span>
                             </a>
-                            <Progress
-                                size="xs"
-                                isIndeterminate
-                                colorScheme="indigo"
-                                className="mt-8"
-                            />
                         </div>
                     </div>
                 </main>

@@ -24,7 +24,7 @@ export default function Navbar({ theme }) {
                         Masycode Cashier App
                         <small className="text-xs opacity-30 mt-2 ml-1">
                             {' '}
-                            v1.2.10.7
+                            v1.3.12.4
                         </small>
                     </button>
                 </div>

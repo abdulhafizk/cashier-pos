@@ -384,7 +384,9 @@ export default function Order() {
                                                 }}
                                                 required
                                             />
-                                            <select
+                                            <input
+                                                type="text"
+                                                placeholder="Penjual (Tidak Wajib)"
                                                 className="input input-sm mb-2 w-full"
                                                 value={orders.user}
                                                 onChange={(event) => {
@@ -397,19 +399,7 @@ export default function Order() {
                                                     })
                                                 }}
                                                 required
-                                            >
-                                                <option value="">
-                                                    Pilih User
-                                                </option>
-                                                {users.map((user) => (
-                                                    <option
-                                                        key={user.id}
-                                                        value={user.name}
-                                                    >
-                                                        {user.name}
-                                                    </option>
-                                                ))}
-                                            </select>
+                                            />
 
                                             <div className="flex justify-between mr-1">
                                                 <div

@@ -14,7 +14,6 @@
     "@emotion/styled": "^11.11.5",
     "autoprefixer": "^10.4.8",
     "cookie-cutter": "^0.2.0",
-    "daisyui": "^2.24.0",
     "framer-motion": "^11.2.14",
     "html2canvas": "^1.4.1",
     "nanoid": "^4.0.0",
@@ -27,6 +26,7 @@
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
+    "daisyui": "^4.12.22",
     "eslint": "8.23.0",
     "eslint-config-next": "12.2.5",
     "tailwindcss": "^3.4.6"

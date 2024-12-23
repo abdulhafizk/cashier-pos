@@ -409,6 +409,32 @@ export default function Dashboard({ constructor }) {
                         </pre>
                         <pre data-prefix=">" className="">
                             <code>
+                                V1.3{' '}
+                                <span className="opacity-20">
+                                    {' '}
+                                    - 23 Desember 2024 -{' '}
+                                </span>
+                            </code>
+                        </pre>
+                        <pre data-prefix="" className="opacity-50">
+                            <code>
+                                Nerf - Penghapusan Fitur Dropdown Add User
+                            </code>
+                        </pre>
+                        <pre data-prefix="" className="opacity-50">
+                            <code>Nerf - Penghapusan Fitur User</code>
+                        </pre>
+                        <pre data-prefix="" className="opacity-50">
+                            <code>Nerf - Penghapusan Fitur Add User</code>
+                        </pre>
+                        <pre data-prefix="" className="opacity-50">
+                            <code>Adjustment - Fitur "Delete All Data"</code>
+                        </pre>
+                        <pre data-prefix="" className="opacity-50">
+                            <code>Adjustment - Struk Kasir</code>
+                        </pre>
+                        <pre data-prefix=">" className="">
+                            <code>
                                 V1.2{' '}
                                 <span className="opacity-20">
                                     {' '}
@@ -417,16 +443,16 @@ export default function Dashboard({ constructor }) {
                             </code>
                         </pre>
                         <pre data-prefix="" className="opacity-50">
-                            <code>- Tambah Penjul Ke Dalam Struk</code>
+                            <code>Buff - Tambah Penjul Ke Dalam Struk</code>
                         </pre>
                         <pre data-prefix="" className="opacity-50">
-                            <code>- Tambah Fitur Download Struk</code>
+                            <code>Buff - Tambah Fitur Download Struk</code>
                         </pre>
                         <pre data-prefix="" className="opacity-50">
-                            <code>- Tambah Menu Impoort</code>
+                            <code>Buff - Tambah Menu Impoort</code>
                         </pre>
                         <pre data-prefix="" className="opacity-50">
-                            <code>- Tambah Sample Untuk Import Data</code>
+                            <code>Buff - Tambah Sample Untuk Import Data</code>
                         </pre>
                         <pre data-prefix=">" className="">
                             <code>
@@ -438,19 +464,19 @@ export default function Dashboard({ constructor }) {
                             </code>
                         </pre>
                         <pre data-prefix="" className="opacity-50">
-                            <code>- Bug Fixes</code>
+                            <code>Buff - Bug Fixes</code>
                         </pre>
                         <pre data-prefix="" className="opacity-50">
-                            <code>- Mobile interface improvements</code>
+                            <code>Buff - Mobile interface improvements</code>
                         </pre>
                         <pre data-prefix="" className="opacity-50">
-                            <code>- Restore data now has previews</code>
+                            <code>Buff - Restore data now has previews</code>
                         </pre>
                         <pre data-prefix="" className="opacity-50">
-                            <code>- Export history to xlsx format</code>
+                            <code>Buff - Export history to xlsx format</code>
                         </pre>
                         <pre data-prefix="" className="opacity-50">
-                            <code>- Custom themes!</code>
+                            <code>Buff - Custom themes!</code>
                         </pre>
                         <pre data-prefix=">" className="">
                             <code>
@@ -462,7 +488,7 @@ export default function Dashboard({ constructor }) {
                             </code>
                         </pre>
                         <pre data-prefix="" className="opacity-50">
-                            <code>- Welcome To CookiePOS!</code>
+                            <code>New React App - Welcome To CookiePOS!</code>
                         </pre>
                     </div>
                 </div>
