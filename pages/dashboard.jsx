@@ -419,19 +419,32 @@ export default function Dashboard({ constructor }) {
                         <pre data-prefix="" className="opacity-50">
                             <code>
                                 Nerf - Penghapusan Fitur Dropdown Add User
+                                <span className="text-red-500">⚫</span>
                             </code>
                         </pre>
                         <pre data-prefix="" className="opacity-50">
-                            <code>Nerf - Penghapusan Fitur User</code>
+                            <code>
+                                Nerf - Penghapusan Fitur User
+                                <span className="text-red-500">⚫</span>
+                            </code>
                         </pre>
                         <pre data-prefix="" className="opacity-50">
-                            <code>Nerf - Penghapusan Fitur Add User</code>
+                            <code>
+                                Nerf - Penghapusan Fitur Add User
+                                <span className="text-red-500">⚫</span>
+                            </code>
                         </pre>
                         <pre data-prefix="" className="opacity-50">
-                            <code>Adjustment - Fitur "Delete All Data"</code>
+                            <code>
+                                Adjustment - Fitur "Delete All Data"
+                                <span className="text-gray-500">⚫</span>
+                            </code>
                         </pre>
                         <pre data-prefix="" className="opacity-50">
-                            <code>Adjustment - Struk Kasir</code>
+                            <code>
+                                Adjustment - Struk Kasir
+                                <span className="text-gray-500">⚫</span>
+                            </code>
                         </pre>
                         <pre data-prefix=">" className="">
                             <code>
@@ -443,16 +456,28 @@ export default function Dashboard({ constructor }) {
                             </code>
                         </pre>
                         <pre data-prefix="" className="opacity-50">
-                            <code>Buff - Tambah Penjul Ke Dalam Struk</code>
+                            <code>
+                                Buff - Tambah Penjul Ke Dalam Struk
+                                <span className="text-green-500">⚫</span>
+                            </code>
                         </pre>
                         <pre data-prefix="" className="opacity-50">
-                            <code>Buff - Tambah Fitur Download Struk</code>
+                            <code>
+                                Buff - Tambah Fitur Download Struk
+                                <span className="text-green-500">⚫</span>
+                            </code>
                         </pre>
                         <pre data-prefix="" className="opacity-50">
-                            <code>Buff - Tambah Menu Impoort</code>
+                            <code>
+                                Buff - Tambah Menu Impoort
+                                <span className="text-green-500">⚫</span>
+                            </code>
                         </pre>
                         <pre data-prefix="" className="opacity-50">
-                            <code>Buff - Tambah Sample Untuk Import Data</code>
+                            <code>
+                                Buff - Tambah Sample Untuk Import Data
+                                <span className="text-green-500">⚫</span>
+                            </code>
                         </pre>
                         <pre data-prefix=">" className="">
                             <code>
@@ -464,19 +489,34 @@ export default function Dashboard({ constructor }) {
                             </code>
                         </pre>
                         <pre data-prefix="" className="opacity-50">
-                            <code>Buff - Bug Fixes</code>
+                            <code>
+                                Buff - Bug Fixes
+                                <span className="text-green-500">⚫</span>
+                            </code>
                         </pre>
                         <pre data-prefix="" className="opacity-50">
-                            <code>Buff - Mobile interface improvements</code>
+                            <code>
+                                Buff - Mobile interface improvements
+                                <span className="text-green-500">⚫</span>
+                            </code>
                         </pre>
                         <pre data-prefix="" className="opacity-50">
-                            <code>Buff - Restore data now has previews</code>
+                            <code>
+                                Buff - Restore data now has previews
+                                <span className="text-green-500">⚫</span>
+                            </code>
                         </pre>
                         <pre data-prefix="" className="opacity-50">
-                            <code>Buff - Export history to xlsx format</code>
+                            <code>
+                                Buff - Export history to xlsx format
+                                <span className="text-green-500">⚫</span>
+                            </code>
                         </pre>
                         <pre data-prefix="" className="opacity-50">
-                            <code>Buff - Custom themes!</code>
+                            <code>
+                                Buff - Custom themes!
+                                <span className="text-green-500">⚫</span>
+                            </code>
                         </pre>
                         <pre data-prefix=">" className="">
                             <code>
